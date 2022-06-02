@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.20)
-project(21-merge-two-sorted-lists)
+project(2-add-two-numbers)
 
 set(CMAKE_CXX_STANDARD 20)
 file(GLOB TARGET_H ./*.h)
 file(GLOB TARGET_SRC ./*.cpp)
 
-add_executable(21-merge-two-sorted-lists
+add_executable(2-add-two-numbers
         ${TARGET_SRC}
         ${TARGET_H}
         main.cpp)
