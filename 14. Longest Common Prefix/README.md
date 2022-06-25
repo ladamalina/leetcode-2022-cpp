@@ -1,4 +1,4 @@
-# Leetcode / 14. Longest Common Prefix (easy) using Python
+# Leetcode / 14. Longest Common Prefix (easy) using C++
 
 Write a function to find the longest common prefix string amongst an array of strings.
 
