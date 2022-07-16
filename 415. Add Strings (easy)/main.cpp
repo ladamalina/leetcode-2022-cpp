@@ -10,8 +10,8 @@ public:
         if (num2 == "0")
             return num1;
 
-        std::string res = "";
-        std::string add = "";
+        std::string res;
+        std::string add;
         if (num1.size() > num2.size()) {
             res = num1;
             add = num2;
@@ -21,13 +21,12 @@ public:
         }
         // add.size() <= res.size()
 
-        int current_sum_int = 0;
         int over_sum_int = 0;
 
         int i = 0;
         while (i < add.size() || i < res.size()) {
-            int res_i = res.size() - i - 1;
-            int add_i = add.size() - i - 1;
+            int res_i = (int) res.size() - i - 1;
+            int add_i = (int) add.size() - i - 1;
 
             std::string res_str = std::string(1, res[res_i]);
             int res_int = std::stoi(res_str);
@@ -38,7 +37,7 @@ public:
                 add_int = std::stoi(add_str);
             }
 
-            current_sum_int = res_int + add_int + over_sum_int;
+            int current_sum_int = res_int + add_int + over_sum_int;
 
             if (current_sum_int >= 10) {
                 over_sum_int = current_sum_int / 10;
