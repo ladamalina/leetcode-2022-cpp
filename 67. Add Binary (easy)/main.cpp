@@ -45,7 +45,6 @@ public:
             }
 
             current_sum_int = res_int + add_int + over_sum_int;
-
             current_sum_bin = std::bitset<2>(current_sum_int).to_string(); //"00000000000000000000000010000000"
             current_sum_bin.erase(0, current_sum_bin.find_first_not_of('0')); //"10000000"
             if (current_sum_bin.empty()) {
@@ -73,21 +72,6 @@ private:
     const std::string ZERO = "0";
     const std::string ONE = "1";
 };
-
-void checkAssertion(const std::vector<int>& actual_res, const std::vector<int>& expected_res) {
-    std::cout << "expected_res: ";
-    for (auto expected_val: expected_res)
-        std::cout << expected_val << ' ';
-    std::cout << std::endl;
-    std::cout << "actual_res: ";
-    for (auto expected_val: actual_res)
-        std::cout << expected_val << ' ';
-    std::cout << std::endl;
-    assert(expected_res.size() == actual_res.size());
-    for (int i=0; i < expected_res.size(); i++) {
-        assert(expected_res[i] == actual_res[i]);
-    }
-}
 
 int main() {
     std::string a1 = "11";
