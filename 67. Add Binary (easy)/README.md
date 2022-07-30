@@ -1,5 +1,7 @@
 # Leetcode / 67. Add Binary (easy) using C++
 
+[https://leetcode.com/problems/add-binary/](https://leetcode.com/problems/add-binary/)
+
 Given two binary strings a and b, return their sum as a binary string.
 
 Constraints:
