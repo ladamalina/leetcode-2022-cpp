@@ -2,15 +2,6 @@
 #include <cmath>
 #include <iostream>
 
-//struct Point {
-//    uint8_t x, y;
-//    bool operator== (const Point&) const;
-//};
-//
-//bool Point::operator== (const Point& p) const {
-//    return x == p.x && y == p.y;
-//}
-
 double factorial(uint64_t x) {
     if (x == 1 || x == 0)
         return 1;
