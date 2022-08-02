@@ -5,9 +5,12 @@
 class Solution {
 public:
     static int strStr(std::string& haystack, std::string& needle) {
+        if (needle.size() > haystack.size())
+            return -1;
+
         int i = 0;
         while (i < haystack.size()) {
-            if (haystack[i] != needle[0] && i + needle.size() >= haystack.size())
+            if (i + needle.size() > haystack.size())
                 break;
             if (haystack[i] != needle[0]) {
                 i++;
@@ -52,4 +55,12 @@ int main() {
     std::string haystack5 = "a";
     std::string needle5 = "a";
     assert(Solution::strStr(haystack5, needle5) == 0);
+
+    std::string haystack6 = "aa";
+    std::string needle6 = "aaa";
+    assert(Solution::strStr(haystack6, needle6) == -1);
+
+    std::string haystack7 = "mississippi";
+    std::string needle7 = "sippia";
+    assert(Solution::strStr(haystack7, needle7) == -1);
 }
