@@ -1,6 +1,6 @@
-# Leetcode / 13. Roman to Integer (easy) using C++
+# Leetcode / 12. Integer to Roman (medium) using C++
 
-[https://leetcode.com/problems/roman-to-integer/](https://leetcode.com/problems/roman-to-integer/)
+[https://leetcode.com/problems/integer-to-roman/](https://leetcode.com/problems/integer-to-roman/)
 
 Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
 
@@ -23,8 +23,10 @@ Roman numerals are usually written largest to smallest from left to right. Howev
 - X can be placed before L (50) and C (100) to make 40 and 90.
 - C can be placed before D (500) and M (1000) to make 400 and 900.
 
-Given a roman numeral, convert it to an integer.
+Given an integer, convert it to a roman numeral.
 
 Constraints:
 
-- `1 <= num <= 3999`
+- `1 <= s.length <= 15`
+- s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').
+- It is guaranteed that s is a valid roman numeral in the range `[1, 3999]`.
