@@ -14,7 +14,7 @@ public:
         int last_uniq_num = -1000;
         int uniq_nums_idx = -1;
 
-        for (int i = 0; i < nums.size(); i++) {
+        for (int i = 0; i < nums.size(); ++i) {
             if (nums[i] > last_uniq_num) {
                 last_uniq_num = nums[i];
                 uniq_nums_idx++;
@@ -38,7 +38,7 @@ int main() {
     std::vector<int> expectedNums1 = {1,2}; // The expected answer with correct length
     int k1 = Solution::removeDuplicates(nums1); // Calls your implementation
     assert(k1 == expectedNums1.size());
-    for (int i = 0; i < k1; i++) {
+    for (int i = 0; i < k1; ++i) {
         assert(nums1[i] == expectedNums1[i]);
     }
 
@@ -46,7 +46,7 @@ int main() {
     std::vector<int> expectedNums2 = {0,1,2,3,4}; // The expected answer with correct length
     int k2 = Solution::removeDuplicates(nums2); // Calls your implementation
     assert(k2 == expectedNums2.size());
-    for (int i = 0; i < k2; i++) {
+    for (int i = 0; i < k2; ++i) {
         assert(nums2[i] == expectedNums2[i]);
     }
 }

@@ -23,7 +23,7 @@ public:
         }
         uint32_t right_half = x % uint32_t(pow(10, half_digits_num));
         uint32_t reverted_right = 0;
-        for (uint8_t i=0; i<half_digits_num; i++) {
+        for (uint8_t i=0; i<half_digits_num; ++i) {
             reverted_right += uint32_t(right_half % 10) * uint32_t(pow(10, (half_digits_num-i-1)));
             right_half = right_half / 10;
         }

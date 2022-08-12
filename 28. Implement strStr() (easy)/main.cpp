@@ -19,7 +19,7 @@ public:
             // haystack[i] == needle[0]
             if (needle.size() == 1)
                 return i;
-            for (int ni = 1; ni < needle.size(); ni++) {
+            for (int ni = 1; ni < needle.size(); ++ni) {
                 int hi = i + ni;
                 if (haystack[hi] == needle[ni]) {
                     if (ni == needle.size() - 1)

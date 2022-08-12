@@ -12,7 +12,7 @@ public:
         int left_idx;
         int right_idx;
 
-        for (int i = 0; i < s.size(); i++) {
+        for (int i = 0; i < s.size(); ++i) {
             if (s.size() - i < longest_half_len)
                 break;
             // Check if symbol may be middle of even palindrome

@@ -5,7 +5,7 @@ class Solution {
 public:
     static bool threeConsecutiveOdds(std::vector<int>& arr) {
         uint8_t odds_len = 0;
-        for (int i = 0; i < arr.size(); i++) {
+        for (int i = 0; i < arr.size(); ++i) {
             if (arr[i] % 2 == 1) {
                 odds_len++;
                 if (odds_len >= 3) {

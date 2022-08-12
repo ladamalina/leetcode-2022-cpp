@@ -13,7 +13,7 @@ public:
 
         int result_nums_idx = -1;
 
-        for (int i = 0; i < nums.size(); i++) {
+        for (int i = 0; i < nums.size(); ++i) {
             if (nums[i] != 0) {
                 result_nums_idx++;
                 nums[result_nums_idx] = nums[i];

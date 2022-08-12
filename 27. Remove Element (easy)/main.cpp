@@ -15,7 +15,7 @@ public:
 
         int result_nums_idx = -1;
 
-        for (int i = 0; i < nums.size(); i++) {
+        for (int i = 0; i < nums.size(); ++i) {
             if (nums[i] != val) {
                 result_nums_idx++;
                 nums[result_nums_idx] = nums[i];
@@ -45,7 +45,7 @@ int main() {
         std::cout << num << " ";
     }
     std::cout << std::endl;
-    for (int i = 0; i < k1; i++) {
+    for (int i = 0; i < k1; ++i) {
         assert(nums1[i] == expectedNums1[i]);
     }
     std::cout << "..........................." << std::endl;
@@ -61,7 +61,7 @@ int main() {
         std::cout << num << " ";
     }
     std::cout << std::endl;
-    for (int i = 0; i < k2; i++) {
+    for (int i = 0; i < k2; ++i) {
         assert(nums2[i] == expectedNums2[i]);
     }
     std::cout << "..........................." << std::endl;
@@ -77,7 +77,7 @@ int main() {
         std::cout << num << " ";
     }
     std::cout << std::endl;
-    for (int i = 0; i < k3; i++) {
+    for (int i = 0; i < k3; ++i) {
         assert(nums3[i] == expectedNums3[i]);
     }
     std::cout << "..........................." << std::endl;

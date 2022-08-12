@@ -17,11 +17,11 @@ public:
     void initChunks() {
         int chunksTotal = ceil((double) numsArray.size() / chunkSize);
         chunkToSum = std::vector(chunksTotal, 0);
-        for (int currentChunk = 0; currentChunk < chunksTotal; currentChunk++) {
+        for (int currentChunk = 0; currentChunk < chunksTotal; ++currentChunk) {
             int begin_i = currentChunk * chunkSize;
             int end_i = std::min(begin_i + chunkSize - 1, (int) numsArray.size() - 1);
             int chunkSum = 0;
-            for (int i = begin_i; i <= end_i; i++)
+            for (int i = begin_i; i <= end_i; ++i)
                 chunkSum += numsArray[i];
             chunkToSum[currentChunk] = chunkSum;
         }
@@ -42,17 +42,17 @@ public:
         int rightChunk = right / chunkSize;
 
         int chunksSum = 0;
-        for (int chunkNum = leftChunk; chunkNum <= rightChunk; chunkNum++)
+        for (int chunkNum = leftChunk; chunkNum <= rightChunk; ++chunkNum)
             chunksSum += chunkToSum[chunkNum];
 
         // remove left redundant nums
         int left_chunk_begin_i = leftChunk * chunkSize;
-        for (int i = left_chunk_begin_i; i < left; i++)
+        for (int i = left_chunk_begin_i; i < left; ++i)
             chunksSum -= numsArray[i];
 
         // remove right redundant nums
         int right_chunk_end_i = std::min(rightChunk * chunkSize + chunkSize - 1, (int) numsArray.size() - 1);
-        for (int i = right + 1; i <= right_chunk_end_i; i++)
+        for (int i = right + 1; i <= right_chunk_end_i; ++i)
             chunksSum -= numsArray[i];
 
         return chunksSum;
@@ -101,7 +101,7 @@ int main() {
 
     std::vector<int> expected3 = {61758,64521,66038,65182,62069,61411,62555,64756,63140,62234,62827,62154,62996,62821,63215,61859,62084,65512,61389,62367,62468,62859,64542,62915,62999,62164,63045,62979,62803,62633,63871,61633,62991,63909,63991,61460,61715,63460,64545,63673,63789,61747,61473,61532,64037,62098,63511,61215,61672,64210,61773,63696,62387,64873,63993,62232,62897,62161,65105,61372,61699,66909,61658,61900,63184,64088,64687};
     int expected3_i = 0;
-    for (int i = 0; i < cmds.size(); i++) {
+    for (int i = 0; i < cmds.size(); ++i) {
         if (cmds[i] == "update") {
 //            std::cout << "update: index = " << args[i][0] << ", val = " << args[i][1] << std::endl;
             numArray3.update(args[i][0], args[i][1]);

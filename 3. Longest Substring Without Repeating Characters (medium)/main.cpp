@@ -24,7 +24,7 @@ public:
                 if (current_seq > longest_seq)
                     longest_seq = current_seq;
                 int double_char_first_idx = chars_to_idx[s[i]];
-                for (int j = begin_idx; j <= double_char_first_idx; j++)
+                for (int j = begin_idx; j <= double_char_first_idx; ++j)
                     chars_to_idx.erase(s[j]);
                 begin_idx = double_char_first_idx + 1;
                 chars_to_idx[s[i]] = i;

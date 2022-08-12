@@ -11,7 +11,7 @@ public:
         std::vector<uint8_t> universeCode(26, 0);
         for (const auto& w : words2) {
             std::vector<uint8_t> wCode = Solution::getStringCode(w);
-            for (uint8_t i = 0; i < Solution::CODE_LEN; i++) {
+            for (uint8_t i = 0; i < Solution::CODE_LEN; ++i) {
                 universeCode[i] = std::max(universeCode[i], wCode[i]);
             }
         }
@@ -21,7 +21,7 @@ public:
         for (const auto& w1 : words1) {
             std::vector<uint8_t> w1Code = Solution::getStringCode(w1);
             bool w1_is_universal = true;
-            for (uint8_t i = 0; i < Solution::CODE_LEN; i++) {
+            for (uint8_t i = 0; i < Solution::CODE_LEN; ++i) {
                 if (w1Code[i] < universeCode[i]) {
                     w1_is_universal = false;
                     break;
@@ -49,12 +49,12 @@ private:
 void checkAssertion(std::vector<std::string>& words1, std::vector<std::string>& words2,
                     std::vector<std::string>& expected_res) {
     std::cout << "words1 (excerpt): ";
-    for (int i = 0; i <= 2; i++) {
+    for (int i = 0; i <= 2; ++i) {
         std::cout << words1[i] << ", ";
     }
     std::cout << "..." << std::endl;
     std::cout << "words2 (excerpt): ";
-    for (int i = 0; i <= 2; i++) {
+    for (int i = 0; i <= 2; ++i) {
         std::cout << words2[i] << ", ";
     }
     std::cout << "..." << std::endl;
@@ -70,7 +70,7 @@ void checkAssertion(std::vector<std::string>& words1, std::vector<std::string>& 
 //    std::cout << std::endl;
     std::sort(expected_res.begin(), expected_res.end());
     std::cout << "expected_res (excerpt): ";
-    for (int i = 0; i <= 2; i++) {
+    for (int i = 0; i <= 2; ++i) {
         std::cout << expected_res[i] << ", ";
     }
     std::cout << "..." << std::endl;
@@ -86,7 +86,7 @@ void checkAssertion(std::vector<std::string>& words1, std::vector<std::string>& 
 
     std::sort(actual_res.begin(), actual_res.end());
     std::cout << "actual_res (excerpt): ";
-    for (int i = 0; i <= 2; i++) {
+    for (int i = 0; i <= 2; ++i) {
         std::cout << actual_res[i] << ", ";
     }
     std::cout << "..." << std::endl;
@@ -98,7 +98,7 @@ void checkAssertion(std::vector<std::string>& words1, std::vector<std::string>& 
     std::cout << "duration: " << duration.count() << std::endl;
     std::cout << "..........................." << std::endl;
     assert(expected_res.size() == actual_res.size());
-    for (int i = 0; i < expected_res.size(); i++) {
+    for (int i = 0; i < expected_res.size(); ++i) {
         assert(expected_res[i] == actual_res[i]);
     }
 }

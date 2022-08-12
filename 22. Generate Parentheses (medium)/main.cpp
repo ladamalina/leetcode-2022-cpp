@@ -69,14 +69,14 @@ int main() {
     }
     std::cout << std::endl;
     assert(expected1.size() == actual1.size());
-    for (int i = 0; i < expected1.size(); i++) {
+    for (int i = 0; i < expected1.size(); ++i) {
         assert(expected1[i] == actual1[i]);
     }
 
     std::vector<std::string> expected2 = {"()"};
     std::vector<std::string> actual2 = Solution().generateParenthesis(1);
     assert(expected2.size() == actual2.size());
-    for (int i = 0; i < expected2.size(); i++) {
+    for (int i = 0; i < expected2.size(); ++i) {
         assert(expected2[i] == actual2[i]);
     }
 }

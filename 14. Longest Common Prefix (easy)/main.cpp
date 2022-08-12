@@ -6,7 +6,7 @@
 class Solution {
 public:
     static bool isCharEq(const std::vector<std::string>& strs, const uint8_t& char_idx) {
-        for (uint8_t str_idx = 0; str_idx < strs.size(); str_idx++) {
+        for (uint8_t str_idx = 0; str_idx < strs.size(); ++str_idx) {
             if (str_idx == 0) {
                 continue;
             }

@@ -7,7 +7,7 @@ class Solution {
 public:
     static std::vector<int> twoSum(std::vector<int>& nums, int target) {
         std::unordered_map<int, int> umap;
-        for (int i = 0; i < nums.size(); i++) {
+        for (int i = 0; i < nums.size(); ++i) {
             int pair_to_find = target - nums[i];
             if (umap.find(pair_to_find) != umap.end()) {
                 return {umap.at(pair_to_find), i};

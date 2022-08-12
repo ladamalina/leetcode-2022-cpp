@@ -19,7 +19,7 @@ public:
         }
 
         int mid_idx = 0;
-        for (size_t i = 0; i < nums.size(); i++) {
+        for (size_t i = 0; i < nums.size(); ++i) {
             if (nums[i] < 0) {
                 mid_idx = i + 1;
             }

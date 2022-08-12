@@ -21,7 +21,7 @@ public:
         if (over_sum > 0) {
             std::vector<int> res_list(digits.size() + 1);
             res_list[0] = over_sum;
-            for (int i = 0; i < digits.size(); i++) {
+            for (int i = 0; i < digits.size(); ++i) {
                 res_list[i+1] = digits[i];
             }
             return res_list;
@@ -40,7 +40,7 @@ void checkAssertion(const std::vector<int>& actual_res, const std::vector<int>& 
         std::cout << expected_val << ' ';
     std::cout << std::endl;
     assert(expected_res.size() == actual_res.size());
-    for (int i=0; i < expected_res.size(); i++) {
+    for (int i=0; i < expected_res.size(); ++i) {
         assert(expected_res[i] == actual_res[i]);
     }
 }

@@ -26,7 +26,7 @@ public:
         }
         size_t res_size = res.size();
         std::vector<int> res_list(res_size);
-        for (int i=0; i < res_size; i++) {
+        for (int i=0; i < res_size; ++i) {
             int next_val = res.front();
             res_list[i] = next_val;
             res.pop_front();
@@ -45,7 +45,7 @@ void checkAssertion(const std::vector<int>& actual_res, const std::vector<int>& 
         std::cout << expected_val << ' ';
     std::cout << std::endl;
     assert(expected_res.size() == actual_res.size());
-    for (int i=0; i < expected_res.size(); i++) {
+    for (int i=0; i < expected_res.size(); ++i) {
         assert(expected_res[i] == actual_res[i]);
     }
 }

@@ -74,13 +74,13 @@ int main() {
     MyCalendar* cal1 = new MyCalendar();
     std::vector<std::vector<int>> input1 = {{10, 20}, {15, 25}, {20, 30}};
     std::vector<bool> expected1 = {true, false, true};
-    for (int i = 0; i < input1.size(); i++)
+    for (int i = 0; i < input1.size(); ++i)
         assert(cal1->book(input1[i][0], input1[i][1]) == expected1[i]);
     
     MyCalendar* cal2 = new MyCalendar();
     std::vector<std::vector<int>> input2 = {{47,50},{33,41},{39,45},{33,42},{25,32},{26,35},{19,25},{3,8},{8,13},{18,27}};
     std::vector<bool> expected2 = {true,true,false,false,true,false,true,true,true,false};
-    for (int i = 0; i < input2.size(); i++) {
+    for (int i = 0; i < input2.size(); ++i) {
         bool actual2 = cal2->book(input2[i][0], input2[i][1]);
         std::cout << "start = " << input2[i][0] << ", end = " << input2[i][1] << std::endl;
         std::cout << "expected = " << expected2[i] << ", actual = " << actual2 << std::endl;
