@@ -22,13 +22,16 @@ public:
     findPathToNode(root, destValue, dest_val_path, true);
 
     std::string direction;
-    direction.reserve(1000);
+    direction.reserve(36);
 
     // find the lowest common parent
     auto start_val_it = start_val_path.begin();
     auto dest_val_it = dest_val_path.begin();
     while (start_val_it->first->val == dest_val_it->first->val) {
 //      std::cout << start_val_it->first->val << " == " << dest_val_it->first->val << "\n";
+      start_val_path.erase(start_val_path.begin(), start_val_it);
+      dest_val_path.erase(dest_val_path.begin(), dest_val_it);
+
       start_val_it = std::next(start_val_it);
       dest_val_it = std::next(dest_val_it);
       if (start_val_it == start_val_path.end() || dest_val_it == dest_val_path.end())
