@@ -15,11 +15,11 @@ public:
     }
 
     void initChunks() {
-        int chunksTotal = ceil((double) numsArray.size() / chunkSize);
+        int chunksTotal = ceil(static_cast<double>(numsArray.size()) / chunkSize);
         chunkToSum = std::vector(chunksTotal, 0);
         for (int currentChunk = 0; currentChunk < chunksTotal; ++currentChunk) {
             int begin_i = currentChunk * chunkSize;
-            int end_i = std::min(begin_i + chunkSize - 1, (int) numsArray.size() - 1);
+            int end_i = std::min(begin_i + chunkSize - 1, static_cast<int>(numsArray.size()) - 1);
             int chunkSum = 0;
             for (int i = begin_i; i <= end_i; ++i)
                 chunkSum += numsArray[i];
@@ -51,7 +51,7 @@ public:
             chunksSum -= numsArray[i];
 
         // remove right redundant nums
-        int right_chunk_end_i = std::min(rightChunk * chunkSize + chunkSize - 1, (int) numsArray.size() - 1);
+        int right_chunk_end_i = std::min(rightChunk * chunkSize + chunkSize - 1, static_cast<int>(numsArray.size()) - 1);
         for (int i = right + 1; i <= right_chunk_end_i; ++i)
             chunksSum -= numsArray[i];
 

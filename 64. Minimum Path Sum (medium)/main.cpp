@@ -6,8 +6,8 @@ class Solution {
   int minPathSum(std::vector<std::vector<int>>& grid) {
     if (grid.size() == 1 && grid[0].size() == 1)
       return grid[0][0];
-    int max_y = (int) grid.size() - 1;
-    int max_x = (int) grid[0].size() - 1;
+    int max_y = static_cast<int>(grid.size()) - 1;
+    int max_x = static_cast<int>(grid[0].size()) - 1;
     int min_dim = std::min(max_x, max_y);
 
     // layer = 0

@@ -7,7 +7,8 @@ public:
     static int firstUniqChar(std::string& s) {
         std::vector<bool> non_unique_chars(26, false);
         std::vector<int> unique_chars_to_idx(26, -1); //  unique charts code to first index
-        for (int i = 0; i < s.size(); ++i) {
+        int s_size = static_cast<int>(s.size());
+        for (int i = 0; i < s_size; ++i) {
             uint8_t ch_code = (uint8_t) s[i] - 48 - 49;
 
             if (non_unique_chars[ch_code])
@@ -18,11 +19,11 @@ public:
             } else
                 unique_chars_to_idx[ch_code] = i;
         }
-        int min_idx = (int) s.size();
+        int min_idx = s_size;
         for (const auto& idx : unique_chars_to_idx)
             if (idx > -1 && idx < min_idx)
                 min_idx = idx;
-        if (min_idx == s.size())
+        if (min_idx == s_size)
             min_idx = -1;
 
         return min_idx;

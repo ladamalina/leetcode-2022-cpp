@@ -4,7 +4,7 @@
 class Solution {
 public:
     static int searchInsert(const std::vector<int>& nums, int target) {
-        return Solution::searchInsertInterval(nums, target, 0, (int) nums.size() - 1);
+        return Solution::searchInsertInterval(nums, target, 0, static_cast<int>(nums.size()) - 1);
     }
 
     static int searchInsertInterval(const std::vector<int>& nums, int target, int leftIdx, int rightIdx) {

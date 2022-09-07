@@ -7,7 +7,7 @@ class Solution {
 public:
     static int romanToInt(const std::string& s) {
         int res = 0;
-        int i = (int) s.size() - 1;
+        int i = static_cast<int>(s.size()) - 1;
         while (i >= 0) {
             int chVal = chToInt.at(s[i]);
             if (i == 0) {

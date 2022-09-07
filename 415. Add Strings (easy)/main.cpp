@@ -25,8 +25,8 @@ public:
 
         int i = 0;
         while (i < add.size() || i < res.size()) {
-            int res_i = (int) res.size() - i - 1;
-            int add_i = (int) add.size() - i - 1;
+            int res_i = static_cast<int>(res.size()) - i - 1;
+            int add_i = static_cast<int>(add.size()) - i - 1;
 
             std::string res_str = std::string(1, res[res_i]);
             int res_int = std::stoi(res_str);

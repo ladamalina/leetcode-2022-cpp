@@ -38,7 +38,7 @@ public:
     static std::vector<uint8_t> getStringCode(const std::string& s) {
         std::vector<uint8_t> stringCode(26, 0);
         for (const auto& ch : s)
-            stringCode[(int) ch - (int) 'a']++;
+            stringCode[static_cast<int>(ch - 'a')]++;
 
         return stringCode;
     }

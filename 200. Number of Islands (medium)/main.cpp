@@ -60,8 +60,8 @@ class Solution {
     for (auto it_y = grid.begin(); it_y < grid.end(); ++it_y) {
       for (auto it_x = it_y->begin(); it_x < it_y->end(); ++it_x) {
         if (*it_x == '1')
-          ones.insert({(int) (it_y - grid.begin()),
-                  (int) (it_x - it_y->begin())});
+          ones.insert({static_cast<int>(it_y - grid.begin()),
+                       static_cast<int>(it_x - it_y->begin())});
       }
     }
   }

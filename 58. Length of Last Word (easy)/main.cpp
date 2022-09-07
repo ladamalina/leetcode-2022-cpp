@@ -4,22 +4,23 @@
 class Solution {
 public:
     static int lengthOfLastWord(const std::string& s) {
-        int last_ch_i = (int) s.size();
-        for (int i = (int) s.size() - 1; i >= 0; --i) {
+        int s_size = static_cast<int>(s.size());
+        int last_ch_i = static_cast<int>(s.size());
+        for (int i = s_size - 1; i >= 0; --i) {
             if (s[i] == ' ') {
-                if (last_ch_i == s.size())
+                if (last_ch_i == s_size)
                     continue;
                 else
                     return last_ch_i - i;
             } else { // non-space character
-                if (last_ch_i == s.size())
+                if (last_ch_i == s_size)
                     last_ch_i = i;
                 if (i == 0)
                     return last_ch_i + 1;
             }
         }
 
-        return (int) s.size();
+        return s_size;
     }
 };
 
