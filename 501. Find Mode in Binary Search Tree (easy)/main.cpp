@@ -28,9 +28,9 @@ public:
         count_to_vals[count].insert(root->val);
         maxCount = std::max(maxCount, count);
 
-        if (root->left != nullptr)
+        if (root->left)
             traverse(root->left);
-        if (root->right != nullptr)
+        if (root->right)
             traverse(root->right);
     }
 private:

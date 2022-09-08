@@ -34,7 +34,7 @@ public:
 
   static size_t getLength(ListNode* head) {
     size_t len = 0;
-    while (head != nullptr) {
+    while (head) {
       ++len;
       head = head->next;
     }

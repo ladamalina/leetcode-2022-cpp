@@ -31,7 +31,7 @@ public:
     void maxDepthTraverse(Node* root, int prevD) {
         maxD = std::max(maxD, prevD + 1);
         for (auto& child : root->children)
-            if (child != nullptr)
+            if (child)
                 maxDepthTraverse(child, prevD + 1);
     }
 private:

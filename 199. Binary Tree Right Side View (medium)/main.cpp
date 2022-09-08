@@ -22,9 +22,9 @@ public:
   void traverse(TreeNode* root, size_t level) {
     if (levels.size() < level + 1)
       levels.push_back(root->val);
-    if (root->right != nullptr)
+    if (root->right)
       traverse(root->right, level+1);
-    if (root->left != nullptr)
+    if (root->left)
       traverse(root->left, level+1);
   }
 private:

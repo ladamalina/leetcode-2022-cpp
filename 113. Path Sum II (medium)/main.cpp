@@ -40,10 +40,10 @@ public:
         std::vector<std::vector<int>> leftPathes;
         std::vector<std::vector<int>> rightPathes;
 
-        if (root->left != nullptr)
+        if (root->left)
             leftPathes = getPathesSum(root->left, targetSum, currentSum, currentPath);
 
-        if (root->right != nullptr) {
+        if (root->right) {
             rightPathes = getPathesSum(root->right, targetSum, currentSum, currentPath);
         }
 

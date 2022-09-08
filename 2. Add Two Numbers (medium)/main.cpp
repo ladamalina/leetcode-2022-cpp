@@ -19,13 +19,13 @@ public:
         int over_sum = 0;
         ListNode* l3p_head = nullptr;
         ListNode* l3p_tail = nullptr;
-        while (l1p != nullptr || l2p != nullptr) {
+        while (l1p || l2p) {
             int l1val = 0;
-            if (l1p != nullptr) {
+            if (l1p) {
                 l1val = l1p->val;
             }
             int l2val = 0;
-            if (l2p != nullptr) {
+            if (l2p) {
                 l2val = l2p->val;
             }
             int current_sum = l1val + l2val + over_sum;
@@ -36,10 +36,10 @@ public:
                 over_sum = 0;
             }
             appendVal(l3p_head, l3p_tail, current_sum);
-            if (l1p != nullptr) {
+            if (l1p) {
                 l1p = l1p->next;
             }
-            if (l2p != nullptr) {
+            if (l2p) {
                 l2p = l2p->next;
             }
         }

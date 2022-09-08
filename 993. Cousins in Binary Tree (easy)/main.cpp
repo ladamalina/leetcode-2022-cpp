@@ -22,21 +22,21 @@ public:
     }
 
     static std::pair<TreeNode*, int> findNode(TreeNode* root, const int val, const int level) {
-      if (root->left != nullptr) {
+      if (root->left) {
         if (root->left->val == val) {
           return {root, level + 1};
         }
         auto find_left = findNode(root->left, val, level+1);
-        if (find_left.first != nullptr) {
+        if (find_left.first) {
           return find_left;
         }
       }
-      if (root->right != nullptr) {
+      if (root->right) {
         if (root->right->val == val) {
           return {root, level + 1};
         }
         auto find_right = findNode(root->right, val, level+1);
-        if (find_right.first != nullptr) {
+        if (find_right.first) {
           return find_right;
         }
       }

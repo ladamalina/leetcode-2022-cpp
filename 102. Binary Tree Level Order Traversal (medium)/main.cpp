@@ -33,9 +33,9 @@ public:
         }
         levelsToNums[currentDepth].push_back(root->val);
 
-        if (root->left != nullptr)
+        if (root->left)
             traverse(root->left, currentDepth + 1);
-        if (root->right != nullptr)
+        if (root->right)
             traverse(root->right, currentDepth + 1);
     }
 private:

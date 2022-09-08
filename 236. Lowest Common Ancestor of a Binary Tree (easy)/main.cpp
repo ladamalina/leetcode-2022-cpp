@@ -33,14 +33,14 @@ public:
             path.reserve(17);
             return path;
         }
-        if (root->left != nullptr) {
+        if (root->left) {
             std::vector<TreeNode*> path = getPathToNode(root->left, target);
             if (!path.empty()) {
                 path.push_back(root);
                 return path;
             }
         }
-        if (root->right != nullptr) {
+        if (root->right) {
             std::vector<TreeNode*> path = getPathToNode(root->right, target);
             if (!path.empty()) {
                 path.push_back(root);

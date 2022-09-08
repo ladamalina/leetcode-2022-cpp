@@ -27,9 +27,9 @@ public:
         }
 
         // not a leaf
-        if (root->left != nullptr)
+        if (root->left)
             minDepthTraverse(root->left, prevD + 1);
-        if (root->right != nullptr)
+        if (root->right)
             minDepthTraverse(root->right, prevD + 1);
     }
 

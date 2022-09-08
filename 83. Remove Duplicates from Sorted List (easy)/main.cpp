@@ -17,7 +17,7 @@ public:
 
         auto currentPtr = head;
         auto nextPtr = head->next;
-        while (nextPtr != nullptr) {
+        while (nextPtr) {
             if (currentPtr->val == nextPtr->val) {
                 // delete next node
                 currentPtr->next = nextPtr->next;

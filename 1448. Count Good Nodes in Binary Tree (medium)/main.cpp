@@ -20,9 +20,9 @@ public:
       int num = 0;
       if (root->val >= prev_max)
         ++num;
-      if (root->left != nullptr)
+      if (root->left)
         num += countGoodNodes(root->left, std::max(root->val, prev_max));
-      if (root->right != nullptr)
+      if (root->right)
         num += countGoodNodes(root->right, std::max(root->val, prev_max));
 
       return num;

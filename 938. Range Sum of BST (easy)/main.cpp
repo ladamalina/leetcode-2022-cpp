@@ -16,9 +16,9 @@ public:
     int range_sum = 0;
     if (low <= root->val && root->val <= high)
       range_sum += root->val;
-    if (root->left != nullptr)
+    if (root->left)
       range_sum += rangeSumBST(root->left, low, high);
-    if (root->right != nullptr)
+    if (root->right)
       range_sum += rangeSumBST(root->right, low, high);
 
     return range_sum;

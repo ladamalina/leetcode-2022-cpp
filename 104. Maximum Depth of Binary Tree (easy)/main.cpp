@@ -21,9 +21,9 @@ public:
 
     void maxDepthTraverse(TreeNode* root, int prevD) {
         maxD = std::max(maxD, prevD + 1);
-        if (root->left != nullptr)
+        if (root->left)
             maxDepthTraverse(root->left, prevD + 1);
-        if (root->right != nullptr)
+        if (root->right)
             maxDepthTraverse(root->right, prevD + 1);
     }
 

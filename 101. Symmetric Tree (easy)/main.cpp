@@ -27,18 +27,18 @@ public:
             return false;
         // p->val == q->val
 
-        if ((p->left == nullptr && q->right != nullptr)
-            || (p->left != nullptr && q->right == nullptr))
+        if ((p->left == nullptr && q->right)
+            || (p->left && q->right == nullptr))
             return false;
-        if (p->left != nullptr && q->right != nullptr && p->val != q->val)
+        if (p->left && q->right && p->val != q->val)
             return false;
         bool leftTreeCheck = isSymmetricSubtrees(p->left, q->right);
         if (!leftTreeCheck)
             return false;
 
-        if (p->right == nullptr && q->left != nullptr || p->right != nullptr && q->left == nullptr)
+        if ((p->right == nullptr && q->left) || (p->right && q->left == nullptr))
             return false;
-        if (p->right != nullptr && q->left != nullptr && p->val != q->val)
+        if (p->right && q->left && p->val != q->val)
             return false;
         bool rightTreeCheck = isSymmetricSubtrees(p->right, q->left);
         if (!rightTreeCheck)

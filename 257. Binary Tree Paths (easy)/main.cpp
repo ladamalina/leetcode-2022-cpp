@@ -33,11 +33,11 @@ public:
             return {currentPath};
 
         std::vector<std::string> leftPathes;
-        if (root->left != nullptr)
+        if (root->left)
             leftPathes = getPathes(root->left, currentPath);
 
         std::vector<std::string> rightPathes;
-        if (root->right != nullptr)
+        if (root->right)
             rightPathes = getPathes(root->right, currentPath);
 
         if (leftPathes.size() >= rightPathes.size()) {

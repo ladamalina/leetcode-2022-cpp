@@ -23,7 +23,7 @@ public:
         ListNode* tail_ptr = nullptr;
         auto l1p = list1;
         auto l2p = list2;
-        while (l1p != nullptr && l2p != nullptr) {
+        while (l1p && l2p) {
             int next_val;
             if (l1p->val <= l2p->val) {
                 next_val = l1p->val;
@@ -42,10 +42,10 @@ public:
                 tail_ptr = new_node_ptr;
             }
         }
-        if (l1p != nullptr) {
+        if (l1p) {
             tail_ptr->next = l1p;
         }
-        if (l2p != nullptr) {
+        if (l2p) {
             tail_ptr->next = l2p;
         }
         return head_ptr;

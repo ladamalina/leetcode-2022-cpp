@@ -27,10 +27,10 @@ public:
         if (root->left == nullptr && root->right == nullptr)
             return currentSum == targetSum;
 
-        if (root->left != nullptr && traverse(root->left, targetSum, currentSum))
+        if (root->left && traverse(root->left, targetSum, currentSum))
             return true;
 
-        if (root->right != nullptr && traverse(root->right, targetSum, currentSum))
+        if (root->right && traverse(root->right, targetSum, currentSum))
             return true;
 
         return false;

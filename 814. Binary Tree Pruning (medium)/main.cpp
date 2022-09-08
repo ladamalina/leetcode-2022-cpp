@@ -12,9 +12,9 @@ struct TreeNode {
 class Solution {
  public:
   TreeNode* pruneTree(TreeNode* root) {
-    if (root->left != nullptr)
+    if (root->left)
       pruneTreeTraverse(root->left, root, true);
-    if (root->right != nullptr)
+    if (root->right)
       pruneTreeTraverse(root->right, root, false);
 
     if (root->left == nullptr && root->right == nullptr) {
@@ -27,9 +27,9 @@ class Solution {
   }
 
   void pruneTreeTraverse(TreeNode* node, TreeNode* parent, bool is_left) {
-    if (node->left != nullptr)
+    if (node->left)
       pruneTreeTraverse(node->left, node, true);
-    if (node->right != nullptr)
+    if (node->right)
       pruneTreeTraverse(node->right, node, false);
 
     if (node->left == nullptr && node->right == nullptr) { // leaf

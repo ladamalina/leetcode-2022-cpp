@@ -29,9 +29,9 @@ public:
         if (levels.size() < level + 1)
             levels.emplace_back();
         levels[level] = std::make_pair(++levels[level].first, levels[level].second + root->val);
-        if (root->left != nullptr)
+        if (root->left)
             traverse(root->left, level + 1);
-        if (root->right != nullptr)
+        if (root->right)
             traverse(root->right, level + 1);
     }
 private:

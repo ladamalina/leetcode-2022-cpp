@@ -61,7 +61,7 @@ public:
       return true;
     }
 
-    if (root->left != nullptr) {
+    if (root->left) {
       auto found_on_left = findPathToNode(root->left, node_val, path_to_append, true);
       if (found_on_left) {
         if (to_left)
@@ -72,7 +72,7 @@ public:
       }
     }
 
-    if (root->right != nullptr) {
+    if (root->right) {
       auto found_on_right = findPathToNode(root->right, node_val, path_to_append, false);
       if (found_on_right) {
         if (to_left)

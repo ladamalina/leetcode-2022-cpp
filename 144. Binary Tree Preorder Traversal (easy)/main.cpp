@@ -23,9 +23,9 @@ public:
     }
     void traverse(TreeNode* root) {
         nums.push_back(root->val);
-        if (root->left != nullptr)
+        if (root->left)
             traverse(root->left);
-        if (root->right != nullptr)
+        if (root->right)
             traverse(root->right);
     }
 private:

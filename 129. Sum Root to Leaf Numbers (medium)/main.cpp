@@ -31,9 +31,9 @@ public:
             total += std::stoi(digits);
             return;
         }
-        if (root->left != nullptr)
+        if (root->left)
             traverse(root->left, digits);
-        if (root->right != nullptr)
+        if (root->right)
             traverse(root->right, digits);
     }
 

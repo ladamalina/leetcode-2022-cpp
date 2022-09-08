@@ -20,17 +20,17 @@ public:
             return false;
         // p->val == q->val
 
-        if (p->left == nullptr && q->left != nullptr || p->left != nullptr && q->left == nullptr)
+        if ((p->left == nullptr && q->left) || (p->left && q->left == nullptr))
             return false;
-        if (p->left != nullptr && q->left != nullptr && p->val != q->val)
+        if (p->left && q->left && p->val != q->val)
             return false;
         bool leftTreeCheck = isSameTree(p->left, q->left);
         if (!leftTreeCheck)
             return false;
 
-        if (p->right == nullptr && q->right != nullptr || p->right != nullptr && q->right == nullptr)
+        if ((p->right == nullptr && q->right) || (p->right && q->right == nullptr))
             return false;
-        if (p->right != nullptr && q->right != nullptr && p->val != q->val)
+        if (p->right && q->right && p->val != q->val)
             return false;
         bool rightTreeCheck = isSameTree(p->right, q->right);
         if (!rightTreeCheck)

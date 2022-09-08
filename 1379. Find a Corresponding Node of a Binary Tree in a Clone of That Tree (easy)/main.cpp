@@ -14,14 +14,14 @@ public:
     static TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
         if (original == target)
             return cloned;
-        if (original->left != nullptr) {
+        if (original->left) {
             auto targetOnLeft = getTargetCopy(original->left, cloned->left, target);
-            if (targetOnLeft != nullptr)
+            if (targetOnLeft)
                 return targetOnLeft;
         }
-        if (original->right != nullptr) {
+        if (original->right) {
             auto targetOnRight = getTargetCopy(original->right, cloned->right, target);
-            if (targetOnRight != nullptr)
+            if (targetOnRight)
                 return targetOnRight;
         }
 

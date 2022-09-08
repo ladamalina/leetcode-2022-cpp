@@ -42,7 +42,7 @@ public:
     static std::deque<int> getDequeFromList(ListNode* head) {
         std::deque<int> res;
         auto headPtr = head;
-        while (headPtr != nullptr) {
+        while (headPtr) {
             res.push_back(headPtr->val);
             headPtr = headPtr->next;
         }
