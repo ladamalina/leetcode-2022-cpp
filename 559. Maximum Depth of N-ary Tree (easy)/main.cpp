@@ -21,7 +21,7 @@ public:
 class Solution {
 public:
     int maxDepth(Node* root) {
-        if (root == nullptr)
+        if (!root)
             return 0;
         maxDepthTraverse(root, 0);
 

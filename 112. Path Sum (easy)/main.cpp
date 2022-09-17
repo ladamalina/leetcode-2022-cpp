@@ -14,7 +14,7 @@ struct TreeNode {
 class Solution {
 public:
     static bool hasPathSum(TreeNode* root, int& targetSum) {
-        if (root == nullptr)
+        if (!root)
             return false;
         auto target = (int16_t) targetSum;
         int16_t initSum = 0;
@@ -24,7 +24,7 @@ public:
     static bool traverse(TreeNode* root, int16_t& targetSum, int16_t& prevSum) {
         int16_t currentSum = prevSum + root->val;
 
-        if (root->left == nullptr && root->right == nullptr)
+        if (!root->left && !root->right)
             return currentSum == targetSum;
 
         if (root->left && traverse(root->left, targetSum, currentSum))

@@ -13,10 +13,10 @@ struct ListNode {
 class Solution {
 public:
     static ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        if (list1 == nullptr) {
+        if (!list1) {
             return list2;
         }
-        if (list2 == nullptr) {
+        if (!list2) {
             return list1;
         }
         ListNode* head_ptr = nullptr;
@@ -34,7 +34,7 @@ public:
             }
             auto* new_node_ptr = new ListNode(next_val);
 
-            if (head_ptr == nullptr) {
+            if (!head_ptr) {
                 head_ptr = new_node_ptr;
                 tail_ptr = new_node_ptr;
             } else {
@@ -62,7 +62,7 @@ void checkAssertion(ListNode* lp, const std::vector<int>& expected_vals) {
         assert(expected_val == current_node_ptr->val);
         current_node_ptr = current_node_ptr->next;
     }
-    assert(current_node_ptr == nullptr);
+    assert(!current_node_ptr);
 }
 
 int main() {

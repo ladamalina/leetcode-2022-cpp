@@ -14,7 +14,7 @@ struct TreeNode {
 class Solution {
 public:
     std::vector<std::vector<int>> levelOrderBottom(TreeNode* root) {
-        if (root == nullptr)
+        if (!root)
             return {};
         levelsToNums = {};
         levelsToNums.reserve(11);

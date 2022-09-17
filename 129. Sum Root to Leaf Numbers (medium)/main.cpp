@@ -15,7 +15,7 @@ struct TreeNode {
 class Solution {
 public:
     int sumNumbers(TreeNode* root) {
-        if (root == nullptr)
+        if (!root)
             return 0;
         std::string digits;
         traverse(root, digits);
@@ -27,7 +27,7 @@ public:
         std::string digits = prev_digits;
         digits += std::to_string(root->val);
 
-        if (root->left == nullptr && root->right == nullptr) {
+        if (!root->left && !root->right) {
             total += std::stoi(digits);
             return;
         }

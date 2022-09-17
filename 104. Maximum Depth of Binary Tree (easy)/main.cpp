@@ -12,7 +12,7 @@ struct TreeNode {
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        if (root == nullptr)
+        if (!root)
             return 0;
         maxDepthTraverse(root, 0);
 

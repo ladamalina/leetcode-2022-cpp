@@ -23,7 +23,7 @@ class Solution {
   }
 
   void traverse(const TreeNode* root, const int k, FoundNode* kth_node) {
-    if (root->left == nullptr && root->right == nullptr) { // leaf
+    if (!root->left && !root->right) { // leaf
       kth_node->val = root->val;
       ++kth_node->kth;
       return;

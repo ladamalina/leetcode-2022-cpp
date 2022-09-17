@@ -21,7 +21,7 @@ class Solution {
   }
  private:
   static std::tuple<int, int, int> traverse(TreeNode* root) {
-    if (root->left == nullptr && root->right == nullptr) {
+    if (!root->left && !root->right) {
       return {0, 0, root->val};
     }
     int left_prev3_max = 0, left_prev2_max = 0, left_prev1_max = 0;

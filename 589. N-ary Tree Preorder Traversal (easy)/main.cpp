@@ -22,7 +22,7 @@ public:
 class Solution {
 public:
     std::vector<int> preorder(Node* root) {
-        if (root == nullptr)
+        if (!root)
             return {};
 
         preorderTraverse(root);

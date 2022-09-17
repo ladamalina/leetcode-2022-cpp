@@ -12,7 +12,7 @@ struct ListNode {
 class Solution {
 public:
     static ListNode* deleteDuplicates(ListNode* head) {
-        if (head == nullptr)
+        if (!head)
             return head;
 
         auto currentPtr = head;
@@ -34,7 +34,7 @@ public:
 
 void check(ListNode* head, std::vector<int>& expected) {
     if (expected.empty())
-        assert(head == nullptr);
+        assert(!head);
 
     for (int e : expected) {
         assert(head->val == e);

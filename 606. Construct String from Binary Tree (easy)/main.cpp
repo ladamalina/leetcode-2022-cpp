@@ -14,7 +14,7 @@ class Solution {
  public:
   static std::string tree2str(TreeNode* root) {
     std::string node_str = std::to_string(root->val);
-    if (root->left == nullptr && root->right == nullptr)
+    if (!root->left && !root->right)
       return node_str;
 
     std::string left_str, right_str;

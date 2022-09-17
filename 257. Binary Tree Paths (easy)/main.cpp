@@ -13,7 +13,7 @@ struct TreeNode {
 class Solution {
 public:
     static std::vector<std::string> binaryTreePaths(TreeNode* root) {
-        if (root == nullptr)
+        if (!root)
             return {};
 
         std::string initPath;
@@ -29,7 +29,7 @@ public:
         else
             currentPath = prevPath + "->" + std::to_string(root->val);
 
-        if (root->left == nullptr && root->right == nullptr)
+        if (!root->left && !root->right)
             return {currentPath};
 
         std::vector<std::string> leftPathes;

@@ -13,7 +13,7 @@ struct TreeNode {
 class Solution {
 public:
   std::vector<int> largestValues(TreeNode* root) {
-    if (root == nullptr)
+    if (!root)
       return {};
 
     largest_vals.reserve(15);

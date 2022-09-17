@@ -21,12 +21,12 @@ class Solution {
  public:
 
   static TreeNode* deleteNode(TreeNode* root, int key) {
-    if (root == nullptr) {
+    if (!root) {
       return root;
     }
     auto current_target = new TargetNode{root, nullptr, false};
     auto target = FindNodeWithParent(current_target, key);
-    if (target->node == nullptr) {
+    if (!target->node) {
       return root;
     }
     DeleteNodeFromBST(target, root);
@@ -55,7 +55,7 @@ class Solution {
 
   static void DeleteNodeFromBST(TargetNode*& target, TreeNode*& origin_root) {
     // Node to be deleted is the leaf: Simply remove from the tree.
-    if (target->node->left == nullptr && target->node->right == nullptr) {
+    if (!target->node->left && !target->node->right) {
       if (target->node == origin_root) { // target node is the origin root
         origin_root = nullptr;
         return;
@@ -70,7 +70,7 @@ class Solution {
     }
 
     // if target node has only left child
-    if (target->node->left && target->node->right == nullptr) {
+    if (target->node->left && !target->node->right) {
       if (target->node == origin_root) { // target node is the origin root
         origin_root = target->node->left;
         return;
@@ -86,7 +86,7 @@ class Solution {
     }
 
     // if target node has only right child
-    if (target->node->left == nullptr && target->node->right) {
+    if (!target->node->left && target->node->right) {
       if (target->node == origin_root) { // target node is the origin root
         origin_root = target->node->right;
         return;
@@ -108,7 +108,7 @@ class Solution {
   }
 
   static int FindAndRemoveSmallestNodeWithParent(TargetNode*& root) {
-    if (root->node->left == nullptr && root->node->right == nullptr) {
+    if (!root->node->left && !root->node->right) {
       if (root->is_left) {
         root->parent->left = nullptr;
       } else {
@@ -116,7 +116,7 @@ class Solution {
       }
       return root->node->val;
     }
-    if (root->node->left == nullptr) {
+    if (!root->node->left) {
       if (root->is_left) {
         root->parent->left = root->node->right;
       } else {
@@ -131,11 +131,11 @@ class Solution {
 };
 
 std::string tree2str(const TreeNode* root) {
-  if (root == nullptr) {
+  if (!root) {
     return "";
   }
   std::string node_str = std::to_string(root->val);
-  if (root->left == nullptr && root->right == nullptr)
+  if (!root->left && !root->right)
     return node_str;
 
   std::string left_str, right_str;

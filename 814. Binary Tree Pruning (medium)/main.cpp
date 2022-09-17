@@ -17,7 +17,7 @@ class Solution {
     if (root->right)
       pruneTreeTraverse(root->right, root, false);
 
-    if (root->left == nullptr && root->right == nullptr) {
+    if (!root->left && !root->right) {
       if (root->val == 0) {
 //        delete root;
         return nullptr;
@@ -32,7 +32,7 @@ class Solution {
     if (node->right)
       pruneTreeTraverse(node->right, node, false);
 
-    if (node->left == nullptr && node->right == nullptr) { // leaf
+    if (!node->left && !node->right) { // leaf
       if (node->val == 0) {
         if (is_left) {
           parent->left = nullptr;

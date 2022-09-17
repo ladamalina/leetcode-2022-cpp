@@ -10,7 +10,7 @@ struct TreeNode {
 class Solution {
 public:
     static bool isValidBST(TreeNode* root) {
-        if (root == nullptr)
+        if (!root)
             return true;
         if (root->left && !isValidBSTLeft(root->left, root->val))
             return false;

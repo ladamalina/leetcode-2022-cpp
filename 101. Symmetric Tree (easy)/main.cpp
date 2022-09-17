@@ -10,25 +10,25 @@ struct TreeNode {
 class Solution {
 public:
     static bool isSymmetric(TreeNode* root) {
-        if (root->left == nullptr && root->right == nullptr)
+        if (!root->left && !root->right)
             return true;
-        if (root->left == nullptr || root->right == nullptr)
+        if (!root->left || !root->right)
             return false;
         return Solution::isSymmetricSubtrees(root->left, root->right);
     }
 
     static bool isSymmetricSubtrees(TreeNode* p, TreeNode* q) {
         // co,pare roots
-        if (p == nullptr && q == nullptr)
+        if (!p && !q)
             return true;
-        if (p == nullptr || q == nullptr)
+        if (!p || !q)
             return false;
         if (p->val != q->val)
             return false;
         // p->val == q->val
 
-        if ((p->left == nullptr && q->right)
-            || (p->left && q->right == nullptr))
+        if ((!p->left && q->right)
+            || (p->left && !q->right))
             return false;
         if (p->left && q->right && p->val != q->val)
             return false;
@@ -36,7 +36,7 @@ public:
         if (!leftTreeCheck)
             return false;
 
-        if ((p->right == nullptr && q->left) || (p->right && q->left == nullptr))
+        if ((!p->right && q->left) || (p->right && !q->left))
             return false;
         if (p->right && q->left && p->val != q->val)
             return false;

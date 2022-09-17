@@ -12,7 +12,7 @@ struct TreeNode {
 class Solution {
 public:
     int minDepth(TreeNode* root) {
-        if (root == nullptr)
+        if (!root)
             return 0;
         minDepthTraverse(root, 0);
 
@@ -21,7 +21,7 @@ public:
 
     void minDepthTraverse(TreeNode* root, int prevD) {
         // leaf
-        if (root->left == nullptr && root->right == nullptr) {
+        if (!root->left && !root->right) {
             minD = std::min(minD, prevD + 1);
             return;
         }

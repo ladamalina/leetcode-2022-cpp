@@ -22,7 +22,7 @@ public:
 class Solution {
 public:
     std::vector<int> postorder(Node* root) {
-        if (root == nullptr)
+        if (!root)
             return {};
         postorderTraverse(root);
         std::vector<int> nodes(nodesQ.begin(), nodesQ.end());

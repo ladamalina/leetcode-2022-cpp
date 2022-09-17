@@ -23,7 +23,7 @@ public:
     }
     // len_a == len_b
     while (headA != headB) {
-      if (headA == nullptr || headB == nullptr)
+      if (!headA || !headB)
         return nullptr;
       headA = headA->next;
       headB = headB->next;

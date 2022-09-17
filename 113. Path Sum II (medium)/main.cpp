@@ -14,7 +14,7 @@ struct TreeNode {
 class Solution {
 public:
     static std::vector<std::vector<int>> pathSum(TreeNode* root, int targetSum) {
-        if (root == nullptr)
+        if (!root)
             return {};
 
         std::vector<int> prevPath;
@@ -24,7 +24,7 @@ public:
     static std::vector<std::vector<int>> getPathesSum(TreeNode* root, int targetSum, int prevSum, std::vector<int>& prevPath) {
         int currentSum = root->val + prevSum;
 
-        if (root->left == nullptr && root->right == nullptr) { // leaf
+        if (!root->left && !root->right) { // leaf
             if (currentSum == targetSum) {
                 auto currentPath = prevPath;
                 currentPath.push_back(root->val);

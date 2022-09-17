@@ -13,7 +13,7 @@ struct TreeNode {
 class Solution {
 public:
   std::vector<int> rightSideView(TreeNode* root) {
-    if (root == nullptr)
+    if (!root)
       return {};
     levels.reserve(7);
     traverse(root, 0);

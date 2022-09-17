@@ -52,7 +52,7 @@ public:
 
     static void appendVal(ListNode*& l3p_head, ListNode*& l3p_tail, int& val) {
         auto l3p = new ListNode(val);
-        if (l3p_head == nullptr) {
+        if (!l3p_head) {
             l3p_head = l3p;
             l3p_tail = l3p;
         } else {
@@ -73,7 +73,7 @@ void checkAssertion(ListNode* lp, const std::vector<int>& expected_vals) {
         assert(expected_val == current_node_ptr->val);
         current_node_ptr = current_node_ptr->next;
     }
-    assert(current_node_ptr == nullptr);
+    assert(!current_node_ptr);
 }
 
 int main() {

@@ -12,7 +12,7 @@ struct TreeNode {
 class Solution {
 public:
     std::vector<double> averageOfLevels(TreeNode* root) {
-        if (root == nullptr)
+        if (!root)
             return {};
 
         levels.reserve(14);

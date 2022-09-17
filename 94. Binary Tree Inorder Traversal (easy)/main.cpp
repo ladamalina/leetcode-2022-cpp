@@ -18,7 +18,7 @@ class Solution {
     return nums;
   }
   void traverse(TreeNode* root) {
-    if (root == nullptr)
+    if (!root)
       return;
     if (root->left)
       traverse(root->left);

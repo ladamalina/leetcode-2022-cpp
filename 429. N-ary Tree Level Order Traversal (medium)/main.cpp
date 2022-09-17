@@ -22,7 +22,7 @@ public:
 class Solution {
 public:
     static std::vector<std::vector<int>> levelOrder(Node* root) {
-        if (root == nullptr)
+        if (!root)
             return {};
         std::vector<std::vector<int>> levelsToNums = {};
         levelsToNums.reserve(1000);

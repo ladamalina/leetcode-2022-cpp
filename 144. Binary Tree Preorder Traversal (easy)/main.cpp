@@ -13,7 +13,7 @@ struct TreeNode {
 class Solution {
 public:
     std::vector<int> preorderTraversal(TreeNode* root) {
-        if (root == nullptr)
+        if (!root)
             return {};
         nums.reserve(100);
 
