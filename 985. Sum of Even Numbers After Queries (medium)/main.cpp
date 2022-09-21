@@ -11,8 +11,6 @@ class Solution {
     std::vector<int> result;
     result.reserve(queries.size());
     for (const auto& upd : queries) {
-
-
       if (isSumEven(nums[upd[1]], upd[0])) {
         if (nums[upd[1]] % 2 == 0) {
           result.push_back(initial_sum + upd[0]);
