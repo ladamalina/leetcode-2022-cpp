@@ -1,4 +1,4 @@
-# Leetcode /1550. Three Consecutive Odds (easy) using C++
+# Leetcode / 1550. Three Consecutive Odds (easy) using C++
 
 Given an integer array arr, return true if there are three consecutive odd numbers in the array. Otherwise, return false.
 
