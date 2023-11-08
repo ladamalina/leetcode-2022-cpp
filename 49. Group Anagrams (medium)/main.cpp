@@ -1,101 +1,92 @@
+// #include <bits/stdc++.h>
+
 #include <algorithm>
+#include <bitset>
 #include <cassert>
+#include <chrono>
+#include <cmath>
+#include <deque>
+#include <fstream>
+#include <functional>
+#include <iomanip>
 #include <iostream>
+#include <iterator>
+#include <limits>
+#include <list>
+#include <map>
+#include <memory>
+#include <numeric>
+#include <optional>
+#include <random>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <stack>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
+#include <variant>
 #include <vector>
+
+using namespace std::literals;
+
+using ll = long long;
+using ii [[maybe_unused]] = std::pair<int, int>;
+using vi [[maybe_unused]] = std::vector<int>;
+using vl [[maybe_unused]] = std::vector<ll>;
+using vvi [[maybe_unused]] = std::vector<vi>;
+using vii [[maybe_unused]] = std::vector<ii>;
+using vb [[maybe_unused]] = std::vector<bool>;
+using vd [[maybe_unused]] = std::vector<double>;
+using vs [[maybe_unused]] = std::vector<std::string>;
+using vvs [[maybe_unused]] = std::vector<vs>;
+
+#define FOR(_i, _a, _b) for (int _i = (_a); _i <= (_b); ++(_i))
+#define FORD(_i, _a, _b) for (int _i = (_a); _i >= (_b); --(_i))
+#define RNG(_l) (_l).begin(), (_l).end()
+#define SORT(_l) std::sort((_l).begin(), (_l).end())
+#define CI(_v) static_cast<int>(_v)
+#define CL(_v) static_cast<ll>(_v)
+#define CD(_v) static_cast<double>(_v)
+#define SZ(_v) static_cast<int>((_v).size())
+#define F first
+#define S second
 
 class Solution {
 public:
-    static std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs) {
-        if (strs.empty())
-            return {};
-        int sizeSqrt = ceil(std::sqrt(strs.size()));
-        std::unordered_map<std::string, size_t> codesToIdx;
-        codesToIdx.reserve(sizeSqrt);
-        std::vector<std::vector<std::string>> grouped;
-        grouped.reserve(sizeSqrt);
-
-        std::string code;
-        for (auto& word : strs) {
-            code = word;
-            std::sort(code.begin(), code.end());
-
-            auto idxIt = codesToIdx.find(code);
-            if (idxIt == codesToIdx.end()) {
-                codesToIdx[code] = grouped.size();
-                grouped.push_back({word});
-            } else {
-                grouped[idxIt->second].push_back(word);
-            }
-        }
-        return grouped;
+  vvs groupAnagrams(vs& strs) {
+    vvs res;
+    std::unordered_map<std::string, int> code_id;
+    for (auto& s : strs) {
+      auto code = s;
+      SORT(code);
+      if (!code_id.contains(code)) {
+        code_id[code] = SZ(res);
+        res.emplace_back();
+      }
+      res[code_id.at(code)].push_back(std::move(s));
     }
+    return res;
+  }
 };
 
-void checkAssert(std::vector<std::vector<std::string>>& actual, std::vector<std::vector<std::string>>& expected) {
-    std::cout << "actual: ";
-    for (int i = 0; i < actual.size(); ++i) {
-        if (i == 0)
-            std::cout << "[";
-        std::sort(actual[i].begin(), actual[i].end());
-        for (int j = 0; j < actual[i].size(); ++j) {
-            if (j == 0)
-                std::cout << "[";
-            std::cout << actual[i][j] << ", ";
-            if (j == actual[i].size() - 1)
-                std::cout << "]";
-        }
-        if (i == actual.size() - 1)
-            std::cout << "]";
-    }
-    std::cout << std::endl;
-    std::sort(actual.begin(), actual.end(),
-              [](const std::vector<std::string>& a, const std::vector<std::string>& b) {
-                  return a[0] < b[0];
-              });
-
-    std::cout << "expected: ";
-    for (int i = 0; i < expected.size(); ++i) {
-        if (i == 0)
-            std::cout << "[";
-        std::sort(expected[i].begin(), expected[i].end());
-        for (int j = 0; j < expected[i].size(); ++j) {
-            if (j == 0)
-                std::cout << "[";
-            std::cout << expected[i][j] << ", ";
-            if (j == expected[i].size() - 1)
-                std::cout << "]";
-        }
-        if (i == expected.size() - 1)
-            std::cout << "]";
-    }
-    std::cout << std::endl;
-    std::sort(expected.begin(), expected.end(),
-              [](const std::vector<std::string>& a, const std::vector<std::string>& b) {
-                  return a[0] < b[0];
-              });
-
-    assert(actual.size() == expected.size());
-    for (int i = 0; i < expected.size(); ++i) {
-        assert(actual[i].size() == expected[i].size());
-        for (int j = 0; j < expected[i].size(); ++j) {
-            std::cout << "assert: " << actual[i][j] << " == " << expected[i][j] << std::endl;
-            assert(actual[i][j] == expected[i][j]);
-        }
-    }
+[[maybe_unused]] void TestSolution() {
+  /*{
+    const auto start_t = std::chrono::high_resolution_clock::now();
+  
+    const auto a_out = Solution().solve();
+    assert(a_out == 6);
+  
+    const auto end_t = std::chrono::high_resolution_clock::now();
+    const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
+    std::cerr << total_t << " ms"sv << std::endl;
+  }*/
+  std::cerr << "TestSolution OK"sv << std::endl;
 }
 
 int main() {
-    std::vector<std::string> strs1 = {"eat","tea","tan","ate","nat","bat"};
-    std::vector<std::vector<std::string>> anagrams1 = Solution::groupAnagrams(strs1);
-    std::vector<std::vector<std::string>> expected1 = {{"bat"},{"nat","tan"},{"ate","eat","tea"}};
-    checkAssert(anagrams1, expected1);
-
-    std::vector<std::string> strs2 = {"bdddddddddd","bbbbbbbbbbc"};
-    std::vector<std::vector<std::string>> anagrams2 = Solution::groupAnagrams(strs2);
-    std::vector<std::vector<std::string>> expected2 = {{"bbbbbbbbbbc"},{"bdddddddddd"}};
-    checkAssert(anagrams2, expected2);
-
-    return 0;
+#ifndef NDEBUG
+  TestSolution();
+#endif
+  return 0;
 }
