@@ -1,23 +1,34 @@
-#pragma GCC optimize("O3")
-#pragma GCC optimize("unroll-loops")
+//#pragma GCC optimize("O3")
+//#pragma GCC optimize("unroll-loops")
 
 #include <bits/stdc++.h>
 
 using namespace std::literals;
 
+#define FOR(_i, _a, _b) for (int _i = (_a); _i <= (_b); ++(_i))
+
 class Solution {
  public:
-  std::vector<int> maxSlidingWindow(std::vector<int>& nums, int k) {
-    auto n = static_cast<int>(nums.size());
+  static std::vector<int> maxSlidingWindow(const std::vector<int>& nums, int k) {
+    const auto n = static_cast<int>(nums.size());
     std::vector<int> res(n-k+1);
-    std::multiset<int> w;
-    for (int i = 0; i < k; ++i) w.insert(nums[i]);
-    res[0] = *std::prev(w.end());
-    for (int l = 0; l < n-k; ++l) {
-      w.erase(w.find(nums[l]));
-      auto r = l + k;
-      w.insert(nums[r]);
-      res[l+1] = *std::prev(w.end());
+    std::deque<int> q;
+    FOR(i, 0, k-1) {
+      while (!q.empty() && q.back() < nums[i]) {
+        q.pop_back();
+      }
+      q.push_back(nums[i]);
+    }
+    res[0] = q.front();
+    FOR(i, k, n-1) {
+      if (!q.empty() && q.front() == nums[i-k]) {
+        q.pop_front();
+      }
+      while (!q.empty() && q.back() < nums[i]) {
+        q.pop_back();
+      }
+      q.push_back(nums[i]);
+      res[i-k+1] = q.front();
     }
     return res;
   }
@@ -29,7 +40,7 @@ class Solution {
     auto k = 3;
     std::vector<int> e_out{3,3,5,5,6,7};
     auto start_t = std::chrono::high_resolution_clock::now();
-    auto a_out = Solution().maxSlidingWindow(nums, k);
+    auto a_out = Solution::maxSlidingWindow(nums, k);
     auto end_t = std::chrono::high_resolution_clock::now();
     auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
     std::cerr << total_t << " ms"sv << std::endl;
@@ -40,7 +51,7 @@ class Solution {
     auto k = 1;
     std::vector<int> e_out{1};
     auto start_t = std::chrono::high_resolution_clock::now();
-    auto a_out = Solution().maxSlidingWindow(nums, k);
+    auto a_out = Solution::maxSlidingWindow(nums, k);
     auto end_t = std::chrono::high_resolution_clock::now();
     auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
     std::cerr << total_t << " ms"sv << std::endl;
