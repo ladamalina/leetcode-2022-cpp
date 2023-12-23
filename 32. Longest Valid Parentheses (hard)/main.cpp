@@ -76,15 +76,22 @@ class Solution {
       // s[i] == '('
       const auto pref_val = (i==0) ? 0 : a[i-1];
       const auto& ids = val_ids[pref_val];
-      auto id_it = std::upper_bound(RNG(ids), i);
-      while (id_it != ids.end()) {
-        const auto min_val = rmq.GetMin(i, *id_it);
-        if (min_val >= pref_val) {
-          const auto len = *id_it - i + 1;
-          max_len = std::max(max_len, len);
-        } else break;
-        ++id_it;
+      const auto id_it = std::upper_bound(RNG(ids), i);
+      if (id_it == ids.end())
+        continue;
+      const auto min_val_l = rmq.GetMin(i, *id_it);
+      if (min_val_l < pref_val)
+        continue;
+      auto l = CI(id_it - ids.begin());
+      auto r = CI(ids.size())-1;
+      while (l < r) {
+        const auto m = (l+r+1)/2;
+        const auto min_val = rmq.GetMin(i, ids[m]);
+        if (min_val >= pref_val) l = m;
+        else r = m-1;
       }
+      const auto len = ids[r] - i + 1;
+      max_len = std::max(max_len, len);
     }
     return max_len;
   }
@@ -94,7 +101,8 @@ class Solution {
   {
     const auto start_t = std::chrono::high_resolution_clock::now();
     const std::string s("(()"s);
-    assert(Solution::longestValidParentheses(s) == 2);
+    const auto a_out = Solution::longestValidParentheses(s);
+    assert(a_out == 2);
     const auto end_t = std::chrono::high_resolution_clock::now();
     const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
     std::cerr << total_t << " ms"sv << std::endl;
