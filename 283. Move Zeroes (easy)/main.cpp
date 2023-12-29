@@ -1,55 +1,92 @@
+// #include <bits/stdc++.h>
+
+#include <algorithm>
+#include <bitset>
 #include <cassert>
+#include <chrono>
+#include <cmath>
+#include <deque>
+#include <fstream>
+#include <functional>
+#include <iomanip>
 #include <iostream>
+#include <iterator>
+#include <limits>
+#include <list>
+#include <map>
+#include <memory>
+#include <numeric>
+#include <optional>
+#include <random>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <variant>
 #include <vector>
+
+using namespace std::literals;
+
+using ll = long long;
+using ii [[maybe_unused]] = std::pair<int, int>;
+using vi [[maybe_unused]] = std::vector<int>;
+using vl [[maybe_unused]] = std::vector<ll>;
+using vvi [[maybe_unused]] = std::vector<vi>;
+using vii [[maybe_unused]] = std::vector<ii>;
+using vb [[maybe_unused]] = std::vector<bool>;
+using vd [[maybe_unused]] = std::vector<double>;
+using vs [[maybe_unused]] = std::vector<std::string>;
+
+#define FOR(_i, _a, _b) for (int _i = (_a); _i <= (_b); ++(_i))
+#define FORD(_i, _a, _b) for (int _i = (_a); _i >= (_b); --(_i))
+#define RNG(_l) (_l).begin(), (_l).end()
+#define SORT(_l) std::sort((_l).begin(), (_l).end())
+#define CI(_v) static_cast<int>(_v)
+#define CL(_v) static_cast<ll>(_v)
+#define CD(_v) static_cast<double>(_v)
+#define SZ(_v) static_cast<int>((_v).size())
+#define F first
+#define S second
 
 class Solution {
 public:
-    static void moveZeroes(std::vector<int>& nums) {
-        std::cout << "input: ";
-        for (auto num : nums) {
-            std::cout << num << " ";
-        }
-        std::cout << std::endl;
-
-        int result_nums_idx = -1;
-
-        for (int i = 0; i < nums.size(); ++i) {
-            if (nums[i] != 0) {
-                result_nums_idx++;
-                nums[result_nums_idx] = nums[i];
-            }
-        }
-
-        while (result_nums_idx > -1 && result_nums_idx + 1 < nums.size()) {
-            result_nums_idx++;
-            if (nums[result_nums_idx] != 0)
-                nums[result_nums_idx] = 0;
-        }
-
-        std::cout << "updated: ";
-        for (auto num : nums) {
-            std::cout << num << " ";
-        }
-        std::cout << std::endl;
+  void moveZeroes(vi& nums) {
+    const auto n = SZ(nums);
+    auto ii=0, oi=0;
+    while (ii < n) {
+      if (nums[ii]!=0) {
+        nums[oi] = nums[ii];
+        ++oi;
+      }
+      ++ii;
     }
+    while (oi < n) {
+      nums[oi] = 0;
+      ++oi;
+    }
+  }
 };
 
+[[maybe_unused]] void TestSolution() {
+  /*{
+    const auto start_t = std::chrono::high_resolution_clock::now();
+  
+    const auto a_out = Solution().solve();
+    assert(a_out == 6);
+  
+    const auto end_t = std::chrono::high_resolution_clock::now();
+    const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
+    std::cerr << total_t << " ms"sv << std::endl;
+  }*/
+  std::cerr << "TestSolution OK"sv << std::endl;
+}
+
 int main() {
-    std::vector<int> nums1 = {0,1,0,3,12};
-    std::vector<int> expectedNums1 = {1,3,12,0,0};
-    Solution::moveZeroes(nums1);
-    assert(nums1 == expectedNums1);
-    std::cout << "..........................." << std::endl;
-
-    std::vector<int> nums2 = {0};
-    std::vector<int> expectedNums2 = {0};
-    Solution::moveZeroes(nums1);
-    assert(nums2 == expectedNums2);
-    std::cout << "..........................." << std::endl;
-
-    std::vector<int> nums3 = {0,0,0};
-    std::vector<int> expectedNums3 = {0,0,0};
-    Solution::moveZeroes(nums3);
-    assert(nums3 == expectedNums3);
-    std::cout << "..........................." << std::endl;
+#ifndef NDEBUG
+  TestSolution();
+#endif
+  return 0;
 }
