@@ -1,21 +1,20 @@
-#include <algorithm>
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 
 class Solution {
  public:
   static int rob(std::vector<int>& nums) {
-    if (nums.size() == 1)
+    const auto n = static_cast<int>(nums.size());
+    if (n == 1)
       return nums[0];
-    if (nums.size() == 2)
+    if (n == 2)
       return std::max(nums[0], nums[1]);
-    // nums.size() >= 3
+    // n >= 3
     nums[2] += nums[0];
-    for (size_t i = 3; i < nums.size(); ++i) {
+    for (int i = 3; i < n; ++i) {
       nums[i] += std::max(nums[i-3], nums[i-2]);
     }
 
-    return std::max(nums.back(), nums[nums.size()-2]);
+    return std::max(nums[n-1], nums[n-2]);
   }
 };
 
