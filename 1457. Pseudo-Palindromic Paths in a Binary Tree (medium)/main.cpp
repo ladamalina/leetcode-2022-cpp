@@ -1,60 +1,27 @@
-#include <cassert>
-#include <vector>
+#include <bits/stdc++.h>
 
 struct TreeNode {
     int val;
-    TreeNode *left;
-    TreeNode *right;
+    TreeNode* left;
+    TreeNode* right;
     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    explicit TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode* l, TreeNode* r) : val(x), left(l), right(r) {}
 };
+
+int DFS(TreeNode* node, int mask) {
+  if (!node->left && !node->right) {
+    return static_cast<int>(__builtin_popcount(mask) <= 1);
+  }
+  return (node->left ? DFS(node->left, mask^(1<<(node->left->val))) : 0)
+      + (node->right ? DFS(node->right, mask^(1<<(node->right->val))) : 0);
+}
 
 class Solution {
  public:
-  Solution() : freqs_(std::vector<int>(10, 0)) {}
-
-  int pseudoPalindromicPaths (const TreeNode* root) {
-    traverse(root);
-    return pseudo_palindromic_paths_;
-  }
- private:
-  std::vector<int> freqs_;
-  int odd_count_ = 0;
-  int pseudo_palindromic_paths_ = 0;
-
-  void traverse(const TreeNode* root) {
-    PushNode(root->val);
-    if (!root->left && !root->right) { // leaf
-      if (odd_count_ <= 1) {
-        ++pseudo_palindromic_paths_;
-      }
-    }
-    if (root->left) {
-      traverse(root->left);
-    }
-    if (root->right) {
-      traverse(root->right);
-    }
-    PopNode(root->val);
-  }
-
-  void PushNode(const int value) {
-    ++freqs_[value];
-    if (freqs_[value] % 2) {
-      ++odd_count_;
-    } else {
-      --odd_count_;
-    }
-  }
-
-  void PopNode(const int value) {
-    --freqs_[value];
-    if (freqs_[value] % 2) {
-      ++odd_count_;
-    } else {
-      --odd_count_;
-    }
+  static int pseudoPalindromicPaths(TreeNode* root) {
+    const auto res = DFS(root, (1<<(root->val)));
+    return res;
   }
 };
 
