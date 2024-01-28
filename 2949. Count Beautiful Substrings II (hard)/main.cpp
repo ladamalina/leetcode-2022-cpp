@@ -6,26 +6,24 @@
 using namespace std::literals;
 
 using ll = long long;
-using ii = std::pair<int, int>;
-using vi = std::vector<int>;
-using vvi = std::vector<vi>;
-using vii = std::vector<ii>;
 
-const std::unordered_set<char> VOWELS{'a','e','i','o','u'};
+bool IsVowel(const char ch) {
+  return ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u';
+}
 
 class Solution {
  public:
   static ll beautifulSubstrings(const std::string& s, int k) {
     const auto n = static_cast<int>(s.size());
 
-    std::unordered_map<ll, std::unordered_map<ll, ll>> prev;
+    std::unordered_map<ll, std::unordered_map<int, ll>> prev;
     prev[0][0] = 1;
-    
+
     ll res = 0;
     int v = 0;
     int c = 0;
     for (int i = 0; i < n; ++i) {
-      if (VOWELS.contains(s[i])) ++v;
+      if (IsVowel(s[i])) ++v;
       else ++c;
       const auto diff = v - c;
       for (const auto& [prev_v, cnt] : prev[diff]) {
@@ -33,7 +31,7 @@ class Solution {
       }
       ++prev[diff][v%k];
     }
-    
+
     return res;
   }
 };
