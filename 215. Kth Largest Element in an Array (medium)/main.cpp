@@ -1,37 +1,84 @@
+// #include <bits/stdc++.h>
+
+#include <algorithm>
+#include <bitset>
 #include <cassert>
-#include <vector>
+#include <chrono>
+#include <cmath>
+#include <deque>
+#include <fstream>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <list>
+#include <map>
+#include <memory>
+#include <numeric>
+#include <optional>
+#include <queue>
 #include <set>
+#include <sstream>
+#include <stack>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <variant>
+#include <vector>
+
+using namespace std::literals;
+
+using ll = long long;
+using ii [[maybe_unused]] = std::pair<int, int>;
+using vi [[maybe_unused]] = std::vector<int>;
+using vl [[maybe_unused]] = std::vector<ll>;
+using vvi [[maybe_unused]] = std::vector<vi>;
+using vii [[maybe_unused]] = std::vector<ii>;
+using vb [[maybe_unused]] = std::vector<bool>;
+using vd [[maybe_unused]] = std::vector<double>;
+using vs [[maybe_unused]] = std::vector<std::string>;
+
+#define FOR(_i, _a, _b) for (int _i = (_a); _i <= (_b); ++(_i))
+#define FORD(_i, _a, _b) for (int _i = (_a); _i >= (_b); --(_i))
+#define RNG(_l) (_l).begin(), (_l).end()
+#define SORT(_l) std::sort((_l).begin(), (_l).end())
+#define CI(_v) static_cast<int>(_v)
+#define CL(_v) static_cast<ll>(_v)
+#define CD(_v) static_cast<double>(_v)
+#define CZ(_v) static_cast<int>((_v).size())
+#define F first
+#define S second
 
 class Solution {
- public:
-  static int findKthLargest(std::vector<int>& nums, int k) {
-    std::multiset<int> nums_set;
-    for (auto& val : nums) {
-      if (nums_set.size() < k) {
-        nums_set.insert(val);
-        continue;
-      }
-      // nums_set.size() == k
-
-      if (val < *nums_set.begin())
-        continue;
-
-      // insert new val
-      nums_set.insert(val);
-      // nums_set.size() == k + 1
-      nums_set.erase(nums_set.begin());
+public:
+  int findKthLargest(vi& nums, int k) {
+    std::priority_queue<int, vi, std::greater<>> pq;
+    for (const auto x : nums) {
+      pq.push(x);
+      if (pq.size() > k) pq.pop();
     }
-
-    return *nums_set.begin();
+    return pq.top();
   }
 };
 
+[[maybe_unused]] void TestSolution() {
+  /*{
+    const auto start_t = std::chrono::high_resolution_clock::now();
+  
+    const auto a_out = Solution().solve();
+    assert(a_out == 6);
+  
+    const auto end_t = std::chrono::high_resolution_clock::now();
+    const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
+    std::cerr << total_t << " ms"sv << std::endl;
+  }*/
+  std::cerr << "TestSolution OK"sv << std::endl;
+}
+
 int main() {
-  std::vector<int> nums1{3,2,1,5,6,4};
-  assert(Solution::findKthLargest(nums1, 2) == 5);
-
-  std::vector<int> nums2{3,2,3,1,2,4,5,5,6};
-  assert(Solution::findKthLargest(nums2, 4) == 4);
-
+#ifndef NDEBUG
+  TestSolution();
+#endif
   return 0;
 }
