@@ -23,7 +23,7 @@ using vvc [[maybe_unused]] = std::vector<vc>;
 
 constexpr ll MOD = 1e9 + 7;
 
-std::array<ll, 10> dp2, dp3; 
+std::array<ll, 10> dp2, dp3;
 
 class Solution {
  public:
@@ -32,7 +32,7 @@ class Solution {
 
     ll dp1_sum = 1;
 
-    std::fill(RNG(dp2), 0);
+    memset(&dp2, 0, sizeof(dp2));
     if (s[0] == '*') {
       // 1-digit
       FOR(d, 1, 9) dp2[d] = dp1_sum;
@@ -42,28 +42,22 @@ class Solution {
       if (d >= 1 && d <= 9) dp2[d] = dp1_sum;
     }
     ll dp2_sum = std::accumulate(RNG(dp2), 0ll) % MOD;
-    
+
     FOR(i, 1, n-1) {
-      std::fill(RNG(dp3), 0);
-      
+      memset(&dp3, 0, sizeof(dp3));
+
       if (s[i] == '*') {
         // 1-digit
         FOR(d, 1, 9) dp3[d] = dp2_sum;
         // 2-digit
         if (s[i-1] == '*') { // **
-          FOR(d2, 1, 9) {
-            FOR(d3, 1, 9) {
-              const auto num = d2*10 + d3;
-              if (num >= 1 && num <= 26)
-                dp3[d3] = (dp3[d3] + dp1_sum) % MOD;
-            }
-          }
+          FOR(d3, 1, 9) dp3[d3] = (dp3[d3] + dp1_sum) % MOD;
+          FOR(d3, 1, 6) dp3[d3] = (dp3[d3] + dp1_sum) % MOD;
         } else { // d*
           const auto d2 = s[i-1]-'0';
-          if (d2 != 0) {
+          if (d2 == 1 || d2 == 2) {
             FOR(d3, 1, 9) {
-              const auto num = d2*10 + d3;
-              if (num >= 1 && num <= 26)
+              if (d2*10 + d3 <= 26)
                 dp3[d3] = (dp3[d3] + dp1_sum) % MOD;
             }
           }
@@ -74,18 +68,14 @@ class Solution {
         if (d3 >= 1 && d3 <= 9) dp3[d3] = dp2_sum;
         // 2-digit
         if (s[i-1] == '*') { // *d
-          FOR(d2, 1, 9) {
-            const auto num = d2*10 + d3;
-            if (num >= 1 && num <= 26)
+          FOR(d2, 1, 2) {
+            if (d2*10 + d3 <= 26)
               dp3[d3] = (dp3[d3] + dp1_sum) % MOD;
           }
         } else { // dd
           const auto d2 = s[i-1]-'0';
-          if (d2 != 0) {
-            const auto num = d2*10 + d3;
-            if (num >= 1 && num <= 26)
-              dp3[d3] = (dp3[d3] + dp1_sum) % MOD;
-          }
+          if (d2 != 0 && d2*10 + d3 <= 26)
+            dp3[d3] = (dp3[d3] + dp1_sum) % MOD;
         }
       }
 
@@ -93,7 +83,7 @@ class Solution {
       dp2 = dp3;
       dp2_sum = std::accumulate(RNG(dp2), 0ll) % MOD;
     }
-    
+
     return dp2_sum;
   }
 };
@@ -164,6 +154,27 @@ class Solution {
 
     auto a_out = Solution::numDecodings("***");
     assert(a_out == 999);
+
+    const auto end_t = std::chrono::high_resolution_clock::now();
+    const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
+    std::cerr << total_t << " ms"sv << std::endl;
+  }
+  {
+    const auto start_t = std::chrono::high_resolution_clock::now();
+
+    const std::string s(1e5, '*');
+    auto a_out = Solution::numDecodings(s);
+    assert(a_out == 81890275);
+
+    const auto end_t = std::chrono::high_resolution_clock::now();
+    const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
+    std::cerr << total_t << " ms"sv << std::endl;
+  }
+  {
+    const auto start_t = std::chrono::high_resolution_clock::now();
+
+    auto a_out = Solution::numDecodings("104");
+    assert(a_out == 1);
 
     const auto end_t = std::chrono::high_resolution_clock::now();
     const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
