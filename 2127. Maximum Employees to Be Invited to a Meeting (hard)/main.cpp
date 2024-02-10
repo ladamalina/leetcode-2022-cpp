@@ -1,26 +1,4 @@
-//#include <bits/stdc++.h>
-
-#include <algorithm>
-#include <cassert>
-#include <chrono>
-#include <cmath>
-#include <deque>
-#include <fstream>
-#include <iomanip>
-#include <iostream>
-#include <limits>
-#include <map>
-#include <numeric>
-#include <optional>
-#include <queue>
-#include <set>
-#include <sstream>
-#include <stack>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <variant>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std::literals;
 
