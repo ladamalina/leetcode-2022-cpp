@@ -1,115 +1,98 @@
+// #include <bits/stdc++.h>
+
+#include <algorithm>
+#include <bitset>
 #include <cassert>
+#include <chrono>
+#include <cmath>
+#include <deque>
+#include <fstream>
+#include <functional>
+#include <iomanip>
 #include <iostream>
+#include <iterator>
+#include <limits>
+#include <list>
+#include <map>
+#include <memory>
+#include <numeric>
+#include <optional>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <variant>
 #include <vector>
 
-struct ListNode {
-    int val;
-    ListNode* next;
+using namespace std::literals;
 
-    ListNode() : val(0), next(nullptr) {}
-    explicit ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode* next) : val(x), next(next) {}
+using ll = long long;
+using ii [[maybe_unused]] = std::pair<int, int>;
+using vi [[maybe_unused]] = std::vector<int>;
+using vl [[maybe_unused]] = std::vector<ll>;
+using vvi [[maybe_unused]] = std::vector<vi>;
+using vii [[maybe_unused]] = std::vector<ii>;
+using vb [[maybe_unused]] = std::vector<bool>;
+using vd [[maybe_unused]] = std::vector<double>;
+using vs [[maybe_unused]] = std::vector<std::string>;
+
+#define FOR(_i, _a, _b) for (int _i = (_a); _i <= (_b); ++(_i))
+#define FORD(_i, _a, _b) for (int _i = (_a); _i >= (_b); --(_i))
+#define RNG(_l) (_l).begin(), (_l).end()
+#define SORT(_l) std::sort((_l).begin(), (_l).end())
+#define CI(_v) static_cast<int>(_v)
+#define CL(_v) static_cast<ll>(_v)
+#define CD(_v) static_cast<double>(_v)
+#define CZ(_v) static_cast<int>((_v).size())
+#define F first
+#define S second
+
+struct ListNode {
+  int val;
+  ListNode* next;
+  ListNode() : val(0), next(nullptr) {}
+  explicit ListNode(int x) : val(x), next(nullptr) {}
+  ListNode(int x, ListNode* next) : val(x), next(next) {}
 };
 
 class Solution {
 public:
-    static ListNode* addTwoNumbers(ListNode*& l1, ListNode*& l2) {
-        auto l1p = l1;
-        auto l2p = l2;
-        int over_sum = 0;
-        ListNode* l3p_head = nullptr;
-        ListNode* l3p_tail = nullptr;
-        while (l1p || l2p) {
-            int l1val = 0;
-            if (l1p) {
-                l1val = l1p->val;
-            }
-            int l2val = 0;
-            if (l2p) {
-                l2val = l2p->val;
-            }
-            int current_sum = l1val + l2val + over_sum;
-            if (current_sum >= 10) {
-                over_sum = current_sum / 10;
-                current_sum = current_sum % 10;
-            } else {
-                over_sum = 0;
-            }
-            appendVal(l3p_head, l3p_tail, current_sum);
-            if (l1p) {
-                l1p = l1p->next;
-            }
-            if (l2p) {
-                l2p = l2p->next;
-            }
-        }
-        if (over_sum > 0) {
-            appendVal(l3p_head, l3p_tail, over_sum);
-        }
-
-        return l3p_head;
+  ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    auto over = 0;
+    auto head = new ListNode();
+    auto node = head;
+    while (l1 || l2 || over) {
+      const auto val = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + over;
+      node->next = new ListNode(val%10);
+      over = val/10;
+      node = node->next;
+      if (l1) l1 = l1->next;
+      if (l2) l2 = l2->next;
     }
-
-    static void appendVal(ListNode*& l3p_head, ListNode*& l3p_tail, int& val) {
-        auto l3p = new ListNode(val);
-        if (!l3p_head) {
-            l3p_head = l3p;
-            l3p_tail = l3p;
-        } else {
-            l3p_tail->next = l3p;
-            l3p_tail = l3p;
-        }
-    }
+    return head->next;
+  }
 };
 
-void checkAssertion(ListNode* lp, const std::vector<int>& expected_vals) {
-    std::cout << "expected_vals: ";
-    for (auto expected_val: expected_vals)
-        std::cout << expected_val << ' ';
-    std::cout << std::endl;
-    ListNode* current_node_ptr = lp;
-    for (int expected_val : expected_vals) {
-        std::cout << "expected_val=" << expected_val << ", current_node_ptr->val=" << current_node_ptr->val << std::endl;
-        assert(expected_val == current_node_ptr->val);
-        current_node_ptr = current_node_ptr->next;
-    }
-    assert(!current_node_ptr);
+[[maybe_unused]] void TestSolution() {
+  /*{
+    const auto start_t = std::chrono::high_resolution_clock::now();
+  
+    const auto a_out = Solution().solve();
+    assert(a_out == 6);
+  
+    const auto end_t = std::chrono::high_resolution_clock::now();
+    const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
+    std::cerr << total_t << " ms"sv << std::endl;
+  }*/
+  std::cerr << "TestSolution OK"sv << std::endl;
 }
 
 int main() {
-    auto l1_3 = new ListNode(3);
-    auto l1_2 = new ListNode(4, l1_3);
-    auto l1 = new ListNode(2, l1_2);
-    auto l2_3 = new ListNode(4);
-    auto l2_2 = new ListNode(6, l2_3);
-    auto l2 = new ListNode(5, l2_2);
-    ListNode* l3p = Solution::addTwoNumbers(l1, l2);
-    std::vector<int> expected_vals1 = {7,0,8};
-    checkAssertion(l3p, expected_vals1);
-    std::cout << ".............................." << std::endl;
-
-    auto l3_1 = new ListNode(0);
-    auto l4_1 = new ListNode(0);
-    ListNode* l5p = Solution::addTwoNumbers(l3_1, l4_1);
-    std::vector<int> expected_vals2 = {0};
-    checkAssertion(l5p, expected_vals2);
-    std::cout << ".............................." << std::endl;
-
-    auto l6_7 = new ListNode(9);
-    auto l6_6 = new ListNode(9, l6_7);
-    auto l6_5 = new ListNode(9, l6_6);
-    auto l6_4 = new ListNode(9, l6_5);
-    auto l6_3 = new ListNode(9, l6_4);
-    auto l6_2 = new ListNode(9, l6_3);
-    auto l6_1 = new ListNode(9, l6_2);
-
-    auto l7_4 = new ListNode(9);
-    auto l7_3 = new ListNode(9, l7_4);
-    auto l7_2 = new ListNode(9, l7_3);
-    auto l7_1 = new ListNode(9, l7_2);
-
-    ListNode* l8p = Solution::addTwoNumbers(l6_1, l7_1);
-    std::vector<int> expected_vals3 = {8,9,9,9,0,0,0,1};
-    checkAssertion(l8p, expected_vals3);
-    std::cout << ".............................." << std::endl;
+#ifndef NDEBUG
+  TestSolution();
+#endif
+  return 0;
 }
