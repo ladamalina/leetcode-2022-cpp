@@ -1,24 +1,13 @@
-#include <bitset>
-#include <cassert>
+#include <bits/stdc++.h>
 
 class Solution {
  public:
   static bool isPowerOfTwo(int n) {
     if (n <= 0)
       return false;
-    // n > 1
-    auto bits = std::bitset<32>(n);
-    int one_pos = -1;
-    for (int i = 0; i < bits.size(); ++i) {
-      if (bits[i]) {
-        if (one_pos == -1) {
-          one_pos = i;
-        }
-        else
-          return false;
-      }
-    }
-    return true;
+    // n >= 1
+    const auto bits = std::bitset<32>(n);
+    return bits.count() == 1;
   }
 };
 
