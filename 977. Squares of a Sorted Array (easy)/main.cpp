@@ -3,62 +3,23 @@
 #include <vector>
 
 class Solution {
-public:
-    static std::vector<int> sortedSquares(std::vector<int>& nums) {
-        std::cout << "input: ";
-        for (auto num : nums) {
-            std::cout << num << " ";
-        }
-        std::cout << std::endl;
-
-        if (nums.empty()) {
-            return nums;
-        }
-        if (nums.size() == 1) {
-            return {nums[0]*nums[0]};
-        }
-
-        int mid_idx = 0;
-        for (size_t i = 0; i < nums.size(); ++i) {
-            if (nums[i] < 0) {
-                mid_idx = i + 1;
-            }
-            nums[i] = nums[i] * nums[i];
-        }
-        std::cout << "mid_idx = " << mid_idx << std::endl;
-
-        std::vector<int> result(nums.size());
-        size_t result_idx = 0;
-        int left_mid_idx = mid_idx - 1;
-        while (left_mid_idx >= 0 && mid_idx < nums.size()) {
-            if (nums[left_mid_idx] >= nums[mid_idx]) {
-                result[result_idx] = nums[mid_idx];
-                mid_idx++;
-            } else {
-                result[result_idx] = nums[left_mid_idx];
-                left_mid_idx--;
-            }
-            result_idx++;
-        }
-        while (left_mid_idx >= 0) {
-            result[result_idx] = nums[left_mid_idx];
-            left_mid_idx--;
-            result_idx++;
-        }
-        while (mid_idx < nums.size()) {
-            result[result_idx] = nums[mid_idx];
-            mid_idx++;
-            result_idx++;
-        }
-
-        std::cout << "after merge: ";
-        for (auto num : result) {
-            std::cout << num << " ";
-        }
-        std::cout << std::endl;
-
-        return result;
+ public:
+  static std::vector<int> sortedSquares(const std::vector<int>& nums) {
+    const auto n = nums.size();
+    int l = 0;
+    int r = n-1;
+    std::vector<int> res(n);
+    for (int i=n-1; i>=0; --i) {
+      if (std::abs(nums[l]) >= std::abs(nums[r])) {
+        res[i] = nums[l] * nums[l];
+        ++l;
+      } else {
+        res[i] = nums[r] * nums[r];
+        --r;
+      }
     }
+    return res;
+  }
 };
 
 int main() {
