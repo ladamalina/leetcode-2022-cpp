@@ -3,35 +3,29 @@
 #include <vector>
 
 class Solution {
-public:
-    static int compareVersion(std::string& version1, std::string& version2) {
-        uint16_t v1 = 0;
-        uint16_t v2 = 0;
-        uint16_t v1_next_idx = 0;
-        uint16_t v2_next_idx = 0;
-        while (v1_next_idx < version1.size() || v2_next_idx < version2.size()) {
-            std::tie(v1, v1_next_idx) = getVersion(version1, v1_next_idx);
-            std::tie(v2, v2_next_idx) = getVersion(version2, v2_next_idx);
-            if (v1 < v2)
-                return -1;
-            if (v1 > v2)
-                return 1;
+    public:
+    static int compareVersion(const std::string& version1, const std::string& version2) {
+        auto v1 = 0, v1_e = 0;
+        auto v2 = 0, v2_e = 0;
+        while (v1_e < static_cast<int>(version1.size()) || v2_e < static_cast<int>(version2.size())) {
+            std::tie(v1, v1_e) = getVersion(version1, v1_e);
+            std::tie(v2, v2_e) = getVersion(version2, v2_e);
+            if (v1 < v2) return -1;
+            if (v1 > v2) return 1;
         }
         return 0;
     }
 
-    static std::pair<uint16_t, uint16_t> getVersion(const std::string& str, const size_t& begin_idx) {
-        std::string v_str;
-        for (size_t i = begin_idx; i < str.size(); ++i) {
-            if (str[i] == '.')
-                break;
-            v_str += str[i];
-        }
-        if (v_str.empty())
-            return {0, str.size()};
+    static std::pair<int, int> getVersion(const std::string& s, int b) {
+        auto e = b;
+        while (e < static_cast<int>(s.size()) && s[e] != '.')
+            ++e;
+        if (b == e)
+            return {0, s.size()};
         else {
-            uint16_t v = stoi(v_str);
-            return {v, begin_idx + v_str.size() + 1};
+            const auto v = std::stoi(s.substr(b, e-b));
+            const auto v_e = e < static_cast<int>(s.size()) ? e+1 : e;
+            return {v, v_e};
         }
     }
 };
