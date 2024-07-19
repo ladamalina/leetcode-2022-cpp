@@ -1,6 +1,7 @@
 // #include <bits/stdc++.h>
 
 #include <algorithm>
+#include <bitset>
 #include <cassert>
 #include <chrono>
 #include <cmath>
@@ -9,7 +10,9 @@
 #include <functional>
 #include <iomanip>
 #include <iostream>
+#include <iterator>
 #include <limits>
+#include <list>
 #include <map>
 #include <memory>
 #include <numeric>
@@ -45,7 +48,6 @@ using vs [[maybe_unused]] = std::vector<std::string>;
 #define CD(_v) static_cast<double>(_v)
 #define F first
 #define S second
-#define PB push_back
 
 class Solution {
 public:
