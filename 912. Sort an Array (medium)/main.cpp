@@ -51,21 +51,68 @@ using vs [[maybe_unused]] = std::vector<std::string>;
 #define F first
 #define S second
 
+std::random_device rd; // obtain a random number from hardware
+std::mt19937 gen(rd()); // seed the generator
+
+template<typename T>
+std::pair<typename std::vector<T>::iterator, typename std::vector<T>::iterator>
+    Partition(typename std::vector<T>::iterator beg, typename std::vector<T>::iterator end, T x) {
+  auto e = beg, g = beg, n = beg;
+  while (n != end) {
+    if (*n == x) {
+      if (g != n) std::swap(*g, *n);
+      ++g;
+    } else if (*n < x) {
+      if (e != g && g != n) {
+        std::swap(*g, *n);
+        std::swap(*e, *g);
+      } else if (e == g && g != n) {
+        std::swap(*g, *n);
+      } else if (e != g && g == n) {
+        std::swap(*e, *n);
+      } else { // e == g && g == n
+        //
+      }
+      ++e;
+      ++g;
+    }
+    ++n;
+  }
+  return {e, g};
+}
+
+template<typename It>
+void QuickSort(It beg, It end) {
+  const auto len = CI(std::distance(beg, end));
+  if (len <= 1) return;
+
+  std::uniform_int_distribution<> distr(0, len-1); // define the range
+  const auto eg = Partition(beg, end, *(beg+distr(gen)));
+  QuickSort(beg, eg.F);
+  QuickSort(eg.S, end);
+}
+
 class Solution {
 public:
+  vi sortArray(vi& nums) {
+    QuickSort(nums.begin(), nums.end());
+    return nums;
+  }
 };
 
 [[maybe_unused]] void TestSolution() {
-  /*{
+  {
     const auto start_t = std::chrono::high_resolution_clock::now();
-  
-    const auto a_out = Solution().solve();
-    assert(a_out == 6);
+
+    vi nums{5,2,3,1};
+    const auto a_out = Solution().sortArray(nums);
+    vi e_out{1,2,3,5};
+    assert(a_out == e_out);
   
     const auto end_t = std::chrono::high_resolution_clock::now();
     const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
     std::cerr << total_t << " ms"sv << std::endl;
-  }*/
+  }
   std::cerr << "TestSolution OK"sv << std::endl;
 }
 
