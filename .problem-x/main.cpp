@@ -35,6 +35,7 @@ using ii [[maybe_unused]] = std::pair<int, int>;
 using vi [[maybe_unused]] = std::vector<int>;
 using vl [[maybe_unused]] = std::vector<ll>;
 using vvi [[maybe_unused]] = std::vector<vi>;
+using vvl [[maybe_unused]] = std::vector<vl>;
 using vii [[maybe_unused]] = std::vector<ii>;
 using vb [[maybe_unused]] = std::vector<bool>;
 using vd [[maybe_unused]] = std::vector<double>;
