@@ -1,6 +1,7 @@
-#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 
-/*#include <algorithm>
+#include <algorithm>
+#include <bitset>
 #include <cassert>
 #include <chrono>
 #include <cmath>
@@ -9,11 +10,14 @@
 #include <functional>
 #include <iomanip>
 #include <iostream>
+#include <iterator>
 #include <limits>
+#include <list>
 #include <map>
 #include <memory>
 #include <numeric>
 #include <optional>
+#include <random>
 #include <queue>
 #include <set>
 #include <sstream>
@@ -22,7 +26,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <variant>
-#include <vector>*/
+#include <vector>
 
 using namespace std::literals;
 
@@ -31,6 +35,7 @@ using ii [[maybe_unused]] = std::pair<int, int>;
 using vi [[maybe_unused]] = std::vector<int>;
 using vl [[maybe_unused]] = std::vector<ll>;
 using vvi [[maybe_unused]] = std::vector<vi>;
+using vvl [[maybe_unused]] = std::vector<vl>;
 using vii [[maybe_unused]] = std::vector<ii>;
 using vb [[maybe_unused]] = std::vector<bool>;
 using vd [[maybe_unused]] = std::vector<double>;
@@ -43,39 +48,98 @@ using vs [[maybe_unused]] = std::vector<std::string>;
 #define CI(_v) static_cast<int>(_v)
 #define CL(_v) static_cast<ll>(_v)
 #define CD(_v) static_cast<double>(_v)
+#define SZ(_v) static_cast<int>((_v).size())
 #define F first
 #define S second
 
+template<typename T>
+class SegTree { // Дерево отрезков на максимум
+public:
+  explicit SegTree(const std::vector<T>& a)
+      : MIN(std::numeric_limits<T>::min()) {
+    while (size_ < CI(a.size())) size_ *= 2;
+    t_.resize(size_ * 2 - 1, MIN);
+    Init(a, 0, 0, size_);
+  }
+
+  T GetMax(int l, int r) {
+    return GetMax(l, r, 0, 0, size_);
+  }
+
+  void Set(int i, T v) {
+    Set(i, v, 0, 0, size_);
+  }
+
+private:
+  std::vector<T> t_;
+  int size_ = 1;
+  const T MIN;
+
+  void Init(const std::vector<T>& a, int x, int lx, int rx) {
+    if (lx + 1 == rx) {
+      if (lx < CI(a.size())) t_[x] = a[lx];
+    } else {
+      const auto m = (lx + rx) / 2;
+      Init(a, 2*x+1, lx, m);
+      Init(a, 2*x+2, m, rx);
+      t_[x] = std::max(t_[2*x+1], t_[2*x+2]);
+    }
+  }
+
+  T GetMax(int l, int r, int x, int lx, int rx) {
+    if (rx <= l || lx >= r) return MIN;
+    if (rx <= r && lx >= l) return t_[x];
+    const auto m = (lx + rx) / 2;
+    return std::max(GetMax(l, r, 2*x+1, lx, m), GetMax(l, r, 2*x+2, m, rx));
+  }
+
+  void Set(int i, T v, int x, int lx, int rx) {
+    if (lx + 1 == rx) {
+      t_[x] = v;
+      return;
+    }
+    const auto m = (lx + rx) / 2;
+    if (i < m) Set(i, v, 2*x+1, lx, m);
+    else Set(i, v, 2*x+2, m, rx);
+    t_[x] = std::max(t_[2*x+1], t_[2*x+2]);
+  }
+};
+
 class Solution {
 public:
-  int maximumLength(const vi& nums, int max_k) {
+  int maximumLength(const vi& nums, const int max_k) {
     const auto n = CI(nums.size());
 
     std::set<int> x_set(RNG(nums));
     std::unordered_map<int, int> x_comp;
-    for (const auto x : x_set)
-      if (!x_comp.contains(x))
-        x_comp[x] = x_comp.size();
-    const auto x_comp_n = CI(x_comp.size());
-
-    vvi dp(max_k+1, vi(x_comp_n, -1));
-    FOR(i, 0, n-1) {
-      const auto x = x_comp.at(nums[i]);
-      dp[0][x] = std::max();
+    for (const auto x : x_set) {
+      x_comp[x] = SZ(x_comp);
     }
-    
-    vvi dp(n, vi(max_k + 1, -1));
-    auto max_res = 0;
+    const auto nx = SZ(x_comp);
+
+    std::vector<SegTree<int>> k_dp(max_k+1, SegTree<int>(vi(nx)));
+    vi i_dp(max_k+1);
     FOR(i, 0, n-1) {
-      dp[i][0] = std::max(dp[i][0], 1);
+      const auto x = x_comp[nums[i]];
+      std::fill(RNG(i_dp), 0);
+      i_dp[0] = 1;
       FOR(k, 0, max_k) {
-        if (dp[i][k] == -1) continue;
-        FOR(j, i+1, n-1) {
-          if (nums[i] == nums[j]) dp[j][k] = std::max(dp[j][k], dp[i][k] + 1);
-          else if (k + 1 <= max_k) dp[j][k + 1] = std::max(dp[j][k + 1], dp[i][k] + 1);
+        const auto max_eq = k_dp[k].GetMax(x, x+1);
+        i_dp[k] = std::max(i_dp[k], max_eq + 1);
+        if (k < max_k) {
+          const auto max_uq = std::max(k_dp[k].GetMax(0, x), k_dp[k].GetMax(x+1, nx));
+          i_dp[k+1] = std::max(i_dp[k+1], max_uq + 1);
         }
-        max_res = std::max(max_res, dp[i][k]);
       }
+      FOR(k, 0, max_k) {
+        if (i_dp[k] > k_dp[k].GetMax(x,x+1))
+          k_dp[k].Set(x, i_dp[k]);
+      }
+    }
+
+    int max_res = 0;
+    FOR(k, 0, max_k) {
+      max_res = std::max(max_res, k_dp[k].GetMax(0, nx));
     }
     return max_res;
   }
