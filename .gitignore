@@ -32,7 +32,10 @@
 *.app
 
 .idea
-cmake-build-*
+cmake-build*
+.cmake-build*
 *.db
 .fleet
 .cache
+.build*
+.vscode

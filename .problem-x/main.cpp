@@ -31,26 +31,31 @@
 using namespace std::literals;
 
 using ll = long long;
+using ld = long double;
 using ii [[maybe_unused]] = std::pair<int, int>;
 using vi [[maybe_unused]] = std::vector<int>;
 using vl [[maybe_unused]] = std::vector<ll>;
 using vvi [[maybe_unused]] = std::vector<vi>;
+using vvvi [[maybe_unused]] = std::vector<vvi>;
 using vvl [[maybe_unused]] = std::vector<vl>;
 using vii [[maybe_unused]] = std::vector<ii>;
 using vb [[maybe_unused]] = std::vector<bool>;
 using vd [[maybe_unused]] = std::vector<double>;
 using vs [[maybe_unused]] = std::vector<std::string>;
+using vc [[maybe_unused]] = std::vector<char>;
 
-#define FOR(_i, _a, _b) for (int _i = (_a); _i <= (_b); ++(_i))
-#define FORD(_i, _a, _b) for (int _i = (_a); _i >= (_b); --(_i))
+#define FOR(_i, _a, _b) for (auto _i = (_a); _i <= (_b); ++(_i))
+#define FORD(_i, _a, _b) for (auto _i = (_a); _i >= (_b); --(_i))
 #define RNG(_l) (_l).begin(), (_l).end()
 #define SORT(_l) std::sort((_l).begin(), (_l).end())
 #define CI(_v) static_cast<int>(_v)
 #define CL(_v) static_cast<ll>(_v)
-#define CD(_v) static_cast<double>(_v)
+#define CD(_v) static_cast<ld>(_v)
+#define CC(_v) static_cast<char>(_v)
 #define SZ(_v) static_cast<int>((_v).size())
 #define F first
 #define S second
+#define PB push_back
 
 class Solution {
 public:
