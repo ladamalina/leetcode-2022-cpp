@@ -1,0 +1,107 @@
+// #include <bits/stdc++.h>
+
+#include <algorithm>
+#include <bitset>
+#include <cassert>
+#include <chrono>
+#include <cmath>
+#include <deque>
+#include <fstream>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <list>
+#include <map>
+#include <memory>
+#include <numeric>
+#include <optional>
+#include <random>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <variant>
+#include <vector>
+
+using namespace std::literals;
+
+using ll = long long;
+using ld = long double;
+using ii [[maybe_unused]] = std::pair<int, int>;
+using vi [[maybe_unused]] = std::vector<int>;
+using vl [[maybe_unused]] = std::vector<ll>;
+using vvi [[maybe_unused]] = std::vector<vi>;
+using vvvi [[maybe_unused]] = std::vector<vvi>;
+using vvl [[maybe_unused]] = std::vector<vl>;
+using vii [[maybe_unused]] = std::vector<ii>;
+using vb [[maybe_unused]] = std::vector<bool>;
+using vd [[maybe_unused]] = std::vector<double>;
+using vs [[maybe_unused]] = std::vector<std::string>;
+using vc [[maybe_unused]] = std::vector<char>;
+
+#define FOR(_i, _a, _b) for (auto _i = (_a); _i <= (_b); ++(_i))
+#define FORD(_i, _a, _b) for (auto _i = (_a); _i >= (_b); --(_i))
+#define RNG(_l) (_l).begin(), (_l).end()
+#define SORT(_l) std::sort((_l).begin(), (_l).end())
+#define CI(_v) static_cast<int>(_v)
+#define CL(_v) static_cast<ll>(_v)
+#define CD(_v) static_cast<ld>(_v)
+#define CC(_v) static_cast<char>(_v)
+#define SZ(_v) static_cast<int>((_v).size())
+#define F first
+#define S second
+#define PB push_back
+
+void DFS(int v, int d, const vi& edges, vi& dist) {
+  if (dist[v] == -1) {
+    dist[v] = d;
+    if (edges[v] != -1) {
+      DFS(edges[v], d + 1, edges, dist);
+    }
+  }
+}
+
+class Solution {
+public:
+  int closestMeetingNode(const vi& edges, int node1, int node2) {
+    const auto n = SZ(edges);
+    vi dist1(n, -1), dist2(n, -1);
+    DFS(node1, 0, edges, dist1);
+    DFS(node2, 0, edges, dist2);
+
+    int res_d = INT_MAX, res_v = -1;
+    FOR(v, 0, n-1) {
+      if (dist1[v] != -1 && dist2[v] != -1 && std::max(dist1[v], dist2[v]) < res_d) {
+        res_d = std::max(dist1[v], dist2[v]);
+        res_v = v;
+      }
+    }
+    return res_v;
+  }
+};
+
+[[maybe_unused]] void TestSolution() {
+  /*{
+    const auto start_t = std::chrono::high_resolution_clock::now();
+  
+    const auto a_out = Solution().solve();
+    assert(a_out == 6);
+  
+    const auto end_t = std::chrono::high_resolution_clock::now();
+    const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
+    std::cerr << total_t << " ms"sv << std::endl;
+  }*/
+  std::cerr << "TestSolution OK"sv << std::endl;
+}
+
+int main() {
+#ifndef NDEBUG
+  TestSolution();
+#endif
+  return 0;
+}
