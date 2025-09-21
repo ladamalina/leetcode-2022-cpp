@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/Users/n-ryabtsova/Library/CloudStorage/Dropbox/Projects/leetcode-2022-cpp/2071. Maximum Number of Tasks You Can Assign (hard)/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin24-g++-14  -Wall -Wextra -Werror -g -std=gnu++20 -arch arm64 -o CMakeFiles/maximum-number-of-tasks-you-can-assign.dir/main.cpp.o -c \"/Users/n-ryabtsova/Library/CloudStorage/Dropbox/Projects/leetcode-2022-cpp/2071. Maximum Number of Tasks You Can Assign (hard)/main.cpp\"",
+  "file": "/Users/n-ryabtsova/Library/CloudStorage/Dropbox/Projects/leetcode-2022-cpp/2071. Maximum Number of Tasks You Can Assign (hard)/main.cpp",
+  "output": "CMakeFiles/maximum-number-of-tasks-you-can-assign.dir/main.cpp.o"
+}
+]
