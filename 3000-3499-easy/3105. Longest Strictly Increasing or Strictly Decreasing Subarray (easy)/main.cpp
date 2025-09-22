@@ -35,6 +35,7 @@ using ii [[maybe_unused]] = std::pair<int, int>;
 using vi [[maybe_unused]] = std::vector<int>;
 using vl [[maybe_unused]] = std::vector<ll>;
 using vvi [[maybe_unused]] = std::vector<vi>;
+using vvl [[maybe_unused]] = std::vector<vl>;
 using vii [[maybe_unused]] = std::vector<ii>;
 using vb [[maybe_unused]] = std::vector<bool>;
 using vd [[maybe_unused]] = std::vector<double>;
@@ -53,22 +54,22 @@ using vs [[maybe_unused]] = std::vector<std::string>;
 
 class Solution {
 public:
-  int nthSuperUglyNumber(const int n, const vi& primes) {
-    if (n == 1)
-      return 1;
-    // n >= 2
-    std::priority_queue<ll, vl, std::greater<>> pq(RNG(primes));
-    std::set<ll> seen{1};
-    while (!pq.empty() && SZ(seen) < n) {
-      const auto x = pq.top();
-      pq.pop();
-      if (seen.contains(x))
+  int longestMonotonicSubarray(const std::vector<int>& nums) {
+    int max_len = 1;
+    auto i = 1;
+    while (i < SZ(nums)) {
+      if (nums[i-1] == nums[i]) {
+        ++i;
         continue;
-      seen.insert(x);
-      for (const auto p : primes)
-        pq.push(p * x);
+      }
+      const auto lt = nums[i-1] < nums[i];
+      auto j = i;
+      while (j+1 < SZ(nums) && nums[j] != nums[j+1] && nums[j] < nums[j+1] == lt)
+        ++j;
+      max_len = std::max(max_len, j-(i-1)+1);
+      i = j + 1;
     }
-    return *seen.rbegin();
+    return max_len;
   }
 };
 
@@ -76,8 +77,8 @@ public:
   {
     const auto start_t = std::chrono::high_resolution_clock::now();
   
-    const auto a_out = Solution().nthSuperUglyNumber(12, {2,7,13,19});
-    assert(a_out == 32);
+    const auto a_out = Solution().longestMonotonicSubarray({1,4,3,3,2});
+    assert(a_out == 2);
   
     const auto end_t = std::chrono::high_resolution_clock::now();
     const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
@@ -86,7 +87,7 @@ public:
   {
     const auto start_t = std::chrono::high_resolution_clock::now();
   
-    const auto a_out = Solution().nthSuperUglyNumber(1, {2,3,5});
+    const auto a_out = Solution().longestMonotonicSubarray({3,3,3,3});
     assert(a_out == 1);
   
     const auto end_t = std::chrono::high_resolution_clock::now();

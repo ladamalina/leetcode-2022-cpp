@@ -31,46 +31,45 @@
 using namespace std::literals;
 
 using ll = long long;
-using ii [[maybe_unused]] = std::pair<int, int>;
-using vi [[maybe_unused]] = std::vector<int>;
-using vl [[maybe_unused]] = std::vector<ll>;
-using vvi [[maybe_unused]] = std::vector<vi>;
-using vii [[maybe_unused]] = std::vector<ii>;
-using vb [[maybe_unused]] = std::vector<bool>;
-using vd [[maybe_unused]] = std::vector<double>;
-using vs [[maybe_unused]] = std::vector<std::string>;
+using ld = long double;
+using ii = std::pair<int, int>;
+using vi = std::vector<int>;
+using vvi = std::vector<vi>;
+using vvvi = std::vector<vvi>;
+using vl = std::vector<ll>;
+using vvl = std::vector<vl>;
+using vvvl = std::vector<vvl>;
+using vii = std::vector<ii>;
+using vb = std::vector<bool>;
+using vd = std::vector<ld>;
+using vs = std::vector<std::string>;
+using vc = std::vector<char>;
 
-#define FOR(_i, _a, _b) for (int _i = (_a); _i <= (_b); ++(_i))
-#define FORD(_i, _a, _b) for (int _i = (_a); _i >= (_b); --(_i))
+#define FOR(_i, _a, _b) for (auto _i = (_a); _i <= (_b); ++(_i))
+#define FORD(_i, _a, _b) for (auto _i = (_a); _i >= (_b); --(_i))
 #define RNG(_l) (_l).begin(), (_l).end()
 #define SORT(_l) std::sort((_l).begin(), (_l).end())
 #define CI(_v) static_cast<int>(_v)
 #define CL(_v) static_cast<ll>(_v)
-#define CD(_v) static_cast<double>(_v)
+#define CD(_v) static_cast<ld>(_v)
+#define CC(_v) static_cast<char>(_v)
 #define SZ(_v) static_cast<int>((_v).size())
 #define F first
 #define S second
-
-using Freq = std::bitset<26>;
+#define PB push_back
 
 class Solution {
 public:
-  int maxProduct(const vs& words) {
-    const auto n = SZ(words);
-    std::vector<Freq> freqs(n);
-    FOR(i, 0, n-1) {
-      auto& f = freqs[i];
-      for (const auto c : words[i])
-        f[c-'a'] = true;
-    }
-    int max_prod = 0;
-    FOR(i, 0, n-2) {
-      FOR(j, i+1, n-1) {
-        if ((freqs[i] & freqs[j]).count() == 0)
-          max_prod = std::max(max_prod, SZ(words[i]) * SZ(words[j]));
+  int areaOfMaxDiagonal(const vvi& ds) {
+    auto max_d2 = -1, max_sq = -1;
+    for (const auto& d : ds) {
+      const auto d2 = d[0] * d[0] + d[1] * d[1], sq = d[0] * d[1];
+      if (d2 > max_d2 || (d2 == max_d2 && sq > max_sq)) {
+        max_d2 = d2;
+        max_sq = sq;
       }
     }
-    return max_prod;
+    return max_sq;
   }
 };
 
