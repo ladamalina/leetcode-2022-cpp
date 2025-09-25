@@ -52,35 +52,28 @@ using vs [[maybe_unused]] = std::vector<std::string>;
 #define S second
 
 constexpr int MAX_N = 50;
-std::array<std::array<ll, MAX_N>, MAX_N> dist;
-
-struct QItem {
-  int i, j;
-  ll d;
-  bool operator>(const QItem& other) const {
-    return d > other.d;
-  }
-};
+std::array<std::array<int, MAX_N>, MAX_N> dist;
 
 class Solution {
 public:
   int minTimeToReach(const vvi& g) {
     const auto n = SZ(g), m = SZ(g[0]);
-    std::fill(&dist[0][0], &dist[0][0] + sizeof(dist) / sizeof(dist[0][0]), LLONG_MAX);
-    std::priority_queue<QItem, std::vector<QItem>, std::greater<>> pq;
-    pq.push({0,0,0});
+    std::fill(&dist[0][0], &dist[0][0] + sizeof(dist) / sizeof(dist[0][0]), INT_MAX);
+    std::priority_queue<std::pair<int, ii>, std::vector<std::pair<int, ii>>, std::greater<>> pq;
+    dist[0][0] = 0;
+    pq.emplace(0, ii{0,0});
     while (!pq.empty()) {
-      const auto i = pq.top().i, j = pq.top().j;
-      const auto d = pq.top().d;
+      const auto d = pq.top().F, i = pq.top().S.F, j = pq.top().S.S;
       pq.pop();
-      if (d >= dist[i][j])
-        continue;
-      dist[i][j] = d;
-      for (const auto& [ni, nj] : vii{{i+1, j}, {i-1, j}, {i, j+1}, {i, j-1}}) {
+      if (i == n-1 && j == m-1)
+        break;
+      for (const auto& [ni, nj] : std::array<ii, 4>{ii{i+1, j}, ii{i-1, j}, ii{i, j+1}, ii{i, j-1}}) {
         if (0 <= ni && ni < n && 0 <= nj && nj < m) {
-          const auto nd = (d >= g[ni][nj]) ? d + 1 : g[ni][nj] + 1;
-          if (nd < dist[ni][nj])
-            pq.push({ni, nj, nd});
+          const auto nd = std::max(d + 1, g[ni][nj] + 1);
+          if (nd < dist[ni][nj]) {
+            dist[ni][nj] = nd;
+            pq.emplace(nd, ii{ni, nj});
+          }
         }
       }
     }

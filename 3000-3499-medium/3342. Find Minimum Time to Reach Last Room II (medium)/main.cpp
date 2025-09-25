@@ -51,41 +51,34 @@ using vs [[maybe_unused]] = std::vector<std::string>;
 #define F first
 #define S second
 
-using plli = std::pair<ll, int>;
-
-struct QItem {
-  int i, j, c;
-  ll d;
-
-  bool operator>(const QItem& other) const {
-    return std::tie(d, c) > std::tie(other.d, other.c);
-  }
-};
+constexpr int MAX_N = 750;
+std::array<std::array<ii, MAX_N>, MAX_N> dist;
 
 class Solution {
 public:
   int minTimeToReach(const vvi& g) {
     const auto n = SZ(g), m = SZ(g[0]);
-    std::vector<std::vector<plli>> dist(n, std::vector<plli>(m, {LLONG_MAX, 2}));
-    std::priority_queue<QItem, std::vector<QItem>, std::greater<>> pq;
-    pq.push({0, 0, 1, 0});
+    FOR(i, 0, n-1) std::fill(dist[i].begin(), dist[i].begin()+m, ii{INT_MAX, 2});
+    std::priority_queue<std::pair<ii,ii>, std::vector<std::pair<ii,ii>>, std::greater<>> pq;
+    dist[0][0] = {0, 1};
+    pq.emplace(ii{0, 1}, ii{0, 0});
     while (!pq.empty()) {
-      const auto i = pq.top().i, j = pq.top().j, c = pq.top().c;
-      const auto d = pq.top().d;
+      const auto [d, c] = pq.top().F;
+      const auto [i, j] = pq.top().S;
       pq.pop();
-      if (plli{d, c} >= dist[i][j])
-        continue;
-      dist[i][j] = {d, c};
-
-      for (const auto& [ni, nj] : vii{{i + 1, j}, {i - 1, j}, {i, j + 1}, {i, j - 1}}) {
+      if (i == n-1 && j == m-1)
+        break;
+      for (const auto& [ni, nj] : std::array<ii,4>{ii{i+1,j}, ii{i-1,j}, ii{i,j+1}, ii{i,j-1}}) {
         if (0 <= ni && ni < n && 0 <= nj && nj < m) {
-          const auto nd = (d >= g[ni][nj]) ? (d + c) : (g[ni][nj] + c);
-          if (plli{nd, 3-c} < dist[ni][nj])
-            pq.push({ni, nj, 3-c, nd});
+          const auto nd = std::max(d, g[ni][nj]) + c;
+          if (ii{nd, 3-c} < dist[ni][nj]) {
+            dist[ni][nj] = {nd, 3-c};
+            pq.emplace(ii{nd, 3-c}, ii{ni, nj});
+          }
         }
       }
     }
-    return dist[n - 1][m - 1].F;
+    return dist[n-1][m-1].F;
   }
 };
 
