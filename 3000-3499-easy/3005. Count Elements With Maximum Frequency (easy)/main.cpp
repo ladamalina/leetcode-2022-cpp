@@ -1,32 +1,26 @@
-// #pragma GCC optimize("O3")
-// #pragma GCC optimize("unroll-loops")
-
+// #pragma GCC optimize("O3,unroll-loops")
 #include <bits/stdc++.h>
 
 using namespace std::literals;
 
-using ll = long long;
-using ii = std::pair<int, int>;
-using vi = std::vector<int>;
-using vl = std::vector<ll>;
-using vii = std::vector<ii>;
+constexpr int MAX_X = 100;
+std::array<int, MAX_X + 1> freq;
 
 class Solution {
 public:
-  static int maxFrequencyElements(const std::vector<int>& nums) {
-    std::array<int, 101> freq;
-    int max_freq = 0;
-    int cnt = 0;
-    for (const auto num : nums) {
-      ++freq[num];
-      if (freq[num] > max_freq) {
-        max_freq = freq[num];
+  int maxFrequencyElements(const std::vector<int>& nums) {
+    std::fill(freq.begin(), freq.end(), 0);
+    auto max_freq = 0, cnt = 0;
+    for (const auto x : nums) {
+      ++freq[x];
+      if (freq[x] > max_freq) {
+        max_freq = freq[x];
         cnt = 1;
-      } else if (freq[num] == max_freq) {
+      } else if (freq[x] == max_freq) {
         ++cnt;
       }
     }
-    return max_freq*cnt;
+    return max_freq * cnt;
   }
 };
 
