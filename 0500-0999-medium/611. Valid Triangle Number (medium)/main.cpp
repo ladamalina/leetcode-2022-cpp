@@ -2,40 +2,46 @@
 
 using namespace std::literals;
 
-using ll [[maybe_unused]] = long long;
-using ii [[maybe_unused]] = std::pair<int, int>;
-using vii [[maybe_unused]] = std::vector<ii>;
-using vi [[maybe_unused]] = std::vector<int>;
-using vl [[maybe_unused]] = std::vector<ll>;
-using vvi [[maybe_unused]] = std::vector<vi>;
-using vvii [[maybe_unused]] = std::vector<vii>;
-using vs [[maybe_unused]] = std::vector<std::string>;
-using vvs [[maybe_unused]] = std::vector<vs>;
-using vc [[maybe_unused]] = std::vector<char>;
-using vvc [[maybe_unused]] = std::vector<vc>;
+using ll = long long;
+using ld = long double;
+using ii = std::pair<int, int>;
+using vi = std::vector<int>;
+using vvi = std::vector<vi>;
+using vvvi = std::vector<vvi>;
+using vl = std::vector<ll>;
+using vvl = std::vector<vl>;
+using vvvl = std::vector<vvl>;
+using vii = std::vector<ii>;
+using vb = std::vector<bool>;
+using vd = std::vector<ld>;
+using vs = std::vector<std::string>;
+using vc = std::vector<char>;
 
-#define FOR(_i, _a, _b) for (int _i = (_a); _i <= (_b); ++(_i))
-#define FORD(_i, _a, _b) for (int _i = (_a); _i >= (_b); --(_i))
+#define FOR(_i, _a, _b) for (auto _i = (_a); _i <= (_b); ++(_i))
+#define FORD(_i, _a, _b) for (auto _i = (_a); _i >= (_b); --(_i))
 #define RNG(_l) (_l).begin(), (_l).end()
 #define SORT(_l) std::sort((_l).begin(), (_l).end())
 #define CI(_v) static_cast<int>(_v)
 #define CL(_v) static_cast<ll>(_v)
+#define CD(_v) static_cast<ld>(_v)
+#define CC(_v) static_cast<char>(_v)
+#define SZ(_v) static_cast<int>((_v).size())
 #define F first
 #define S second
+#define PB push_back
 
 class Solution {
  public:
   static int triangleNumber(vi& nums) {
-    const auto n = CI(nums.size());
+    const auto n = SZ(nums);
     SORT(nums);
     int cnt = 0;
-    FOR(i, 0, n-3) {
-      FOR(j, i+1, n-2) {
-        const auto k = CI(std::lower_bound(nums.begin()+j+1, nums.end(), nums[i]+nums[j]) - nums.begin());
-        if (k > j)
-          cnt += (k-j-1);
+    FOR(i, 0, n - 3) {
+      FOR(j, i + 1, n - 2) {
+        const auto k = CI(std::lower_bound(nums.begin() + j + 1, nums.end(), nums[i] + nums[j]) - nums.begin());
+        cnt += k - j - 1;
       }
-    }
+    }o
     return cnt;
   }
 };
