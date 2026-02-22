@@ -1,86 +1,114 @@
+// #include <bits/stdc++.h>
+
+#include <algorithm>
+#include <bitset>
 #include <cassert>
+#include <chrono>
+#include <cmath>
+#include <deque>
+#include <fstream>
+#include <functional>
+#include <iomanip>
+#include <iostream>
 #include <iterator>
+#include <limits>
+#include <list>
+#include <map>
+#include <memory>
+#include <numeric>
+#include <optional>
+#include <random>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <variant>
 #include <vector>
+
+using namespace std::literals;
+
+using ll = long long;
+using ld = long double;
+using ii = std::pair<int, int>;
+using vi = std::vector<int>;
+using vvi = std::vector<vi>;
+using vvvi = std::vector<vvi>;
+using vl = std::vector<ll>;
+using vvl = std::vector<vl>;
+using vvvl = std::vector<vvl>;
+using vii = std::vector<ii>;
+using vb = std::vector<bool>;
+using vd = std::vector<ld>;
+using vs = std::vector<std::string>;
+using vc = std::vector<char>;
+
+#define FOR(_i, _a, _b) for (auto _i = (_a); _i <= (_b); ++(_i))
+#define FORD(_i, _a, _b) for (auto _i = (_a); _i >= (_b); --(_i))
+#define RNG(_l) (_l).begin(), (_l).end()
+#define SORT(_l) std::sort((_l).begin(), (_l).end())
+#define CI(_v) static_cast<int>(_v)
+#define CL(_v) static_cast<ll>(_v)
+#define CD(_v) static_cast<ld>(_v)
+#define CC(_v) static_cast<char>(_v)
+#define SZ(_v) static_cast<int>((_v).size())
+#define F first
+#define S second
+#define PB push_back
+
+constexpr int MAX_N = 1e5;
+std::array<int, MAX_N> ids;
 
 class Solution {
 public:
-  static int maxArea(std::vector<int>& height) {
-    auto leftIt = height.begin();
-    auto rightIt = height.end() - 1;
-    int max_amount = 0;
-
-    while (leftIt < rightIt) {
-      int current_amount = (rightIt - leftIt) * std::min(*leftIt, *rightIt);
-      max_amount = std::max(max_amount, current_amount);
-
-      // looking for left line higher than height[left_idx] and closer to center
-      if (*leftIt < *rightIt) {
-        auto it = std::find_if(leftIt, rightIt + 1,
-                               [&leftIt](const int& h){ return h > *leftIt; });
-        if (it >= rightIt)
-          break;
-        leftIt = it;
-        continue;
-      }
-
-      // looking for right line higher than height[right_idx] and closer to center
-      if (*leftIt > *rightIt) {
-        auto it = findClosesHigherRight(leftIt, rightIt);
-        if (it <= leftIt)
-          break;
-        rightIt = it;
-        continue;
-      }
-
-      // height[left_idx] == height[right_idx]
-      auto closestLeftIt = std::find_if(leftIt, rightIt + 1,
-                                        [&leftIt](const int& h){ return h > *leftIt; });
-      if (closestLeftIt >= rightIt)
-        break;
-      auto closestRightIt = findClosesHigherRight(leftIt, rightIt);
-      if (closestRightIt <= leftIt)
-        break;
-
-      if (*closestLeftIt > *closestRightIt) { // move left line to center
-        leftIt = closestLeftIt;
-        continue;
-      }
-      if (*closestLeftIt < *closestRightIt) { // move right line to center
-        rightIt = closestRightIt;
-        continue;
-      }
-      // *closestLeftIt == *closestRightIt, so looking for closest line to move
-      auto leftDistance = closestLeftIt - leftIt;
-      auto rightDistance = closestRightIt - rightIt;
-      if (leftDistance > rightDistance) { // move right line to center
-        rightIt = closestRightIt;
-        continue;
-      } else { // move left line to center
-        leftIt = closestLeftIt;
-        continue;
-      }
+  int maxArea(const vi& h) {
+    const auto n = SZ(h);
+    std::iota(ids.begin(), ids.begin() + n, 0);
+    std::sort(ids.begin(), ids.begin() + n, [&](const int i, const int j) { return h[i] > h[j]; });
+    auto mni = ids[0], mxi = ids[0], max_res = 0;
+    FOR(i, 1, n-1) {
+      const auto j = ids[i];
+      const auto r1 = std::abs(j - mni) * h[j], r2 = std::abs(j - mxi) * h[j];
+      max_res = std::max(max_res, r1);
+      max_res = std::max(max_res, r2);
+      mni = std::min(mni, j);
+      mxi = std::max(mxi, j);
     }
-
-    return max_amount;
-  }
-
-  static std::vector<int>::iterator findClosesHigherRight(const std::vector<int>::iterator& leftIt,
-                                                          const std::vector<int>::iterator& rightIt) {
-    auto movedRightIt = leftIt - 1;
-    for (auto it = rightIt; it >= leftIt; --it) {
-      if (*it > *rightIt) {
-        movedRightIt = it;
-        break;
-      }
-    }
-    return movedRightIt;
+    return max_res;
   }
 };
 
-int main() {
-  std::vector<int> nums1{1, 8, 6, 2, 5, 4, 8, 3, 7};
-  assert(Solution::maxArea(nums1) == 49);
+[[maybe_unused]] void TestSolution() {
+  {
+    const auto start_t = std::chrono::high_resolution_clock::now();
 
-  std::vector<int> nums2{1, 1};
-  assert(Solution::maxArea(nums2) == 1);
+    const vi h{1,8,6,2,5,4,8,3,7};
+    const auto a_out = Solution().maxArea(h);
+    assert(a_out == 49);
+  
+    const auto end_t = std::chrono::high_resolution_clock::now();
+    const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
+    std::cerr << total_t << " ms"sv << std::endl;
+  }
+  {
+    const auto start_t = std::chrono::high_resolution_clock::now();
+
+    const vi h{1,1};
+    const auto a_out = Solution().maxArea(h);
+    assert(a_out == 1);
+  
+    const auto end_t = std::chrono::high_resolution_clock::now();
+    const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
+    std::cerr << total_t << " ms"sv << std::endl;
+  }
+  std::cerr << "TestSolution OK"sv << std::endl;
+}
+
+int main() {
+#ifndef NDEBUG
+  TestSolution();
+#endif
+  return 0;
 }

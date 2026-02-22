@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(11-container-with-most-water)
+project(container-with-most-water)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
 file(GLOB TARGET_H ./*.h)
 file(GLOB TARGET_SRC ./*.cpp)
 
-add_executable(11-container-with-most-water
+add_executable(container-with-most-water
         ${TARGET_SRC}
         ${TARGET_H}
         main.cpp)
