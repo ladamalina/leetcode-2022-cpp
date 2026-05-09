@@ -1,0 +1,26 @@
+name: Test 1914
+
+on:
+  push:
+    paths:
+      - '1500-1999-medium/1914. Cyclically Rotating a Grid (medium)/**'
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: '1500-1999-medium/1914. Cyclically Rotating a Grid (medium)'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v6
+      - name: Run the build process with Docker
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ladamalina/cpp-env:gcc-16.1
+          options: -v ${{ github.workspace }}:/opt/proj
+          run: |
+            cd /opt/proj
+            cmake -S . -B .build
+            cmake --build .build
+            .build/cyclically-rotating-a-grid
