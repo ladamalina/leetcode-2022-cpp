@@ -70,24 +70,24 @@ public:
 [[maybe_unused]] void TestSolution() {
   {
     const auto start_t = std::chrono::high_resolution_clock::now();
-  
-    vvi g{{40,10},{30,20}};
-    const vvi e_out{{10,20},{40,30}};
+
+    vvi g{{40, 10}, {30, 20}};
+    const vvi e_out{{10, 20}, {40, 30}};
     const auto a_out = Solution().rotateGrid(g, 1);
     assert(a_out == e_out);
-  
+
     const auto end_t = std::chrono::high_resolution_clock::now();
     const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
     std::cerr << total_t << " ms"sv << std::endl;
   }
   {
     const auto start_t = std::chrono::high_resolution_clock::now();
-  
-    vvi g{{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
-    const vvi e_out{{3,4,8,12},{2,11,10,16},{1,7,6,15},{5,9,13,14}};
+
+    vvi g{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+    const vvi e_out{{3, 4, 8, 12}, {2, 11, 10, 16}, {1, 7, 6, 15}, {5, 9, 13, 14}};
     const auto a_out = Solution().rotateGrid(g, 2);
     assert(a_out == e_out);
-  
+
     const auto end_t = std::chrono::high_resolution_clock::now();
     const auto total_t = std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count();
     std::cerr << total_t << " ms"sv << std::endl;
