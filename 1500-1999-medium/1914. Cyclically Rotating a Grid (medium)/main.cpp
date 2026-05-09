@@ -34,7 +34,7 @@ constexpr int MAX_N = 50, MAX_L = MAX_N * 4;
 int r[MAX_L], c[MAX_L], val[MAX_L];
 
 class Solution {
-public:
+ public:
   vvi rotateGrid(vvi& g, const int k) {
     const auto m = SZ(g), n = SZ(g[0]);
     const auto nl = std::min(m >> 1, n >> 1);
@@ -57,7 +57,7 @@ public:
         len++;
       }
       const auto kk = k % len;
-      FOR(i, 0, len-1) {
+      FOR(i, 0, len - 1) {
         const auto idx = (i + len - kk) % len;
         g[r[i]][c[i]] = val[idx];
       }
