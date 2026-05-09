@@ -18,7 +18,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: ladamalina/cpp-env:gcc-16.1
-          options: -v ${{ github.workspace }}:/opt/proj
+          options: -v '${{ github.workspace }}/1500-1999-medium/1914. Cyclically Rotating a Grid (medium)':/opt/proj
           run: |
             cd /opt/proj
             cmake -S . -B .build
