@@ -1,0 +1,23 @@
+name: Test 3510
+
+on:
+  push:
+    paths:
+      - '3500-3999-hard/3510. Minimum Pair Removal to Sort Array II (hard)/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v6
+      - name: Run the build process with Docker
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ladamalina/cpp-env:gcc-16.1
+          options: -v ${{ github.workspace }}:/opt/proj
+          run: |
+            cd '/opt/proj/3500-3999-hard/3510. Minimum Pair Removal to Sort Array II (hard)'
+            cmake -S . -B .build
+            cmake --build .build
+            .build/minimum-pair-removal-to-sort-array-ii
