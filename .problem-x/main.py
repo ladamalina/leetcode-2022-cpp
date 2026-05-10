@@ -1,5 +1,7 @@
+import random
 import sys
 import time
+from typing import *
 
 
 def solution():

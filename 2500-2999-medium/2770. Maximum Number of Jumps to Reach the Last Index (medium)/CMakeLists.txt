@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(problem-x)
+project(maximum-number-of-jumps-to-reach-the-last-index)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -18,7 +18,7 @@ set(ignore_Python_EXECUTABLE "${Python_EXECUTABLE}")
 file(GLOB TARGET_H ./*.h)
 file(GLOB TARGET_SRC ./*.cpp)
 
-add_executable(problem-x
+add_executable(maximum-number-of-jumps-to-reach-the-last-index
         ${TARGET_SRC}
         ${TARGET_H}
         main.cpp)

@@ -1,0 +1,23 @@
+name: Test 2770
+
+on:
+  push:
+    paths:
+      - '2500-2999-medium/2770. Maximum Number of Jumps to Reach the Last Index (medium)/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v6
+      - name: Run the build process with Docker
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ladamalina/cpp-env:gcc-16.1
+          options: -v ${{ github.workspace }}:/opt/proj
+          run: |
+            cd '/opt/proj/2500-2999-medium/2770. Maximum Number of Jumps to Reach the Last Index (medium)'
+            cmake -S . -B .build
+            cmake --build .build
+            .build/maximum-number-of-jumps-to-reach-the-last-index
